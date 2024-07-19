@@ -16,6 +16,20 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Name -->
+        <div class="mt-4">
+            <x-input-label for="section" :value="__('Section')" />
+            <x-text-input id="section" class="block mt-1 w-full" type="text" name="section" :value="old('section')" required autofocus autocomplete="section" />
+            <x-input-error :messages="$errors->get('section')" class="mt-2" />
+        </div>
+
+        <!-- Name -->
+        <div class="mt-4">
+            <x-input-label for="position" :value="__('Position')" />
+            <x-text-input id="position" class="block mt-1 w-full" type="text" name="position" :value="old('position')" required autofocus autocomplete="position" />
+            <x-input-error :messages="$errors->get('position')" class="mt-2" />
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
