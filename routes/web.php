@@ -27,6 +27,10 @@ Route::controller(ProjectController::class)->group(function() {
 
 Route::controller(UserController::class)->group(function() {
     Route::get('/user', 'index')->name('user.index')->middleware('auth');
+    Route::get('/user/add', 'add')->name('user.add')->middleware('auth');
+    Route::post('/user/save', 'save')->name('user.save')->middleware('auth');
+    Route::get('/user/edit/{user:id}', 'edit')->name('user.edit')->middleware('auth');
+    Route::post('/user/update/{user:id}', 'update')->name('user.update')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

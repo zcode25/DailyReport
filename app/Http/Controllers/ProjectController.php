@@ -37,6 +37,6 @@ class ProjectController extends Controller
 
         ]);
 
-        return redirect(route('project.index', absolute: false));
+        return redirect(route('project.index', absolute: false))->with('success', 'Data successfully added');
     }
 }

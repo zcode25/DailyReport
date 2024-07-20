@@ -8,7 +8,7 @@
             </div>
             <div class="basis-1/2">
                 <div class="text-end">
-                    <a href="{{ route('project.add') }}" class="btn btn-primary btn-sm text-white">Add</a>
+                    <a href="{{ route('user.add') }}" class="btn btn-primary btn-sm text-white">Add</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                             <p>Section : {{ $user->section }}</p>
                             <p>Position : {{ $user->position }}</p>
                             <div class="card-actions justify-end">
-                                <button class="btn btn-primary text-white btn-sm">Detail</button>
+                                <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-primary text-white btn-sm">Update</a>
                             </div>
                         </div>
                     </div>
