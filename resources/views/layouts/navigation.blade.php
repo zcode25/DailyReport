@@ -76,10 +76,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project.index')">
+            <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project*')">
                 {{ __('Project') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user*')">
                 {{ __('User') }}
             </x-responsive-nav-link>
         </div>

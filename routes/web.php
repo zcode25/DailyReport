@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectDetailController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -23,7 +24,17 @@ Route::controller(ProjectController::class)->group(function() {
     Route::get('/project', 'index')->name('project.index')->middleware('auth');
     Route::get('/project/add', 'add')->name('project.add')->middleware('auth');
     Route::post('/project/save', 'save')->name('project.save')->middleware('auth');
+    Route::get('/project/edit/{project:projectId}', 'edit')->name('project.edit')->middleware('auth');
+    Route::post('/project/update/{project:projectId}', 'update')->name('project.update')->middleware('auth');
 });
+
+
+Route::controller(ProjectDetailController::class)->group(function() {
+    Route::get('/projectDetail/{project:projectId}', 'index')->name('projectDetail.index')->middleware('auth');
+    Route::get('/projectDetail/add/{project:projectId}', 'add')->name('projectDetail.add')->middleware('auth');
+    Route::post('/projectDetail/save/{project:projectId}', 'save')->name('projectDetail.save')->middleware('auth');
+});
+
 
 Route::controller(UserController::class)->group(function() {
     Route::get('/user', 'index')->name('user.index')->middleware('auth');
@@ -31,6 +42,7 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/user/save', 'save')->name('user.save')->middleware('auth');
     Route::get('/user/edit/{user:id}', 'edit')->name('user.edit')->middleware('auth');
     Route::post('/user/update/{user:id}', 'update')->name('user.update')->middleware('auth');
+    Route::delete('/user/destroy/{user:id}', 'destroy')->name('user.destroy')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';

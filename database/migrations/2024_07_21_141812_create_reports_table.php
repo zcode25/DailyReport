@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->char('projectId', 10)->primary();
-            $table->string('projectName');
-            $table->text('projectAddress');
-            $table->string('customer');
-            $table->string('address');
-            $table->text('projectDesc');
+        Schema::create('reports', function (Blueprint $table) {
+            $table->char('reportId', 20)->primary();
+            $table->char('projectId', 10);
+            $table->foreign('projectId')->references('projectId')->on('projects')->onUpdate('cascade')->onDelete('restrict');
+            $table->date('date');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('reports');
     }
 };

@@ -32,6 +32,9 @@
                 {{ $slot }}
             </main>
         </div>
+
         @include('sweetalert::alert')
+        <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+    
     </body>
 </html>

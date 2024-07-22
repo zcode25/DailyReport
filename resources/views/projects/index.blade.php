@@ -14,19 +14,25 @@
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 @foreach ($projects as $project)
-                    <div class="card bg-white text-black shadow mb-6">
-                        <div class="card-body">
-                        <h2 class="card-title">{{ $project->projectName }}</h2>
-                        <p>{{ $project->customer }}</p>
-                        <p class="mb-3">{{ $project->projectAddress }}</p>
-                        <p>{{ $project->projectDesc }}</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary text-white btn-sm">Detail</button>
-                        </div>
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-3">
+                        <div class="p-6 text-gray-900">
+                            <h2 class="text-xl font-bold mb-3">{{ $project->projectName }}</h2>
+                            <p class="font-bold">Project Address</p>
+                            <p class="mb-3"> {{ $project->projectAddress }}</p>
+                            <p class="font-bold">Customer</p>
+                            <p class="mb-3"> {{ $project->customer }}</p>
+                            <p class="font-bold">Address</p>
+                            <p class="mb-3"> {{ $project->address }}</p>
+                            <p class="font-bold">Description</p>
+                            <p class="mb-3"> {{ $project->projectDesc }}</p>
+                            <div class="card-actions justify-end mt-5">
+                                <a href="{{ route('project.edit', ['project' => $project->projectId]) }}" class="btn btn-primary text-white btn-sm">Update</a>
+                                <a href="{{ route('projectDetail.index', ['project' => $project->projectId]) }}" class="btn btn-success text-white btn-sm">Detail</a> 
+                            </div>
                         </div>
                     </div>
                 @endforeach

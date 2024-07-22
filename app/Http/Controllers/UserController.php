@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index () {
+        $title = 'Delete Data!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('user.index', [
             'users' => User::latest()->get(),
         ]);
@@ -29,7 +33,7 @@ class UserController extends Controller
             'password' => ['required', 'min:8'],
         ]);
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'section' => $request->section,
@@ -55,7 +59,26 @@ class UserController extends Controller
         ]);
 
 
+        User::where('id', $user->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'section' => $request->section,
+            'position' => $request->position,
+        ]);
 
-        // Supplier::where('supplierId', $supplier->supplierId)->update($validatedData);
+        return redirect(route('user.index', absolute: false))->with('success', 'Data successfully updated');
+
+    }
+
+    public function destroy(User $user) {
+        try{
+            User::where('id', $user->id)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+
+        return redirect(route('user.index', absolute: false))->with('success', 'Data deleted successfully');
     }
 }
