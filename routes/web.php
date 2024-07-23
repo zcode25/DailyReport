@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectDetailController;
@@ -30,9 +31,13 @@ Route::controller(ProjectController::class)->group(function() {
 
 
 Route::controller(ProjectDetailController::class)->group(function() {
-    Route::get('/projectDetail/{project:projectId}', 'index')->name('projectDetail.index')->middleware('auth');
-    Route::get('/projectDetail/add/{project:projectId}', 'add')->name('projectDetail.add')->middleware('auth');
-    Route::post('/projectDetail/save/{project:projectId}', 'save')->name('projectDetail.save')->middleware('auth');
+    Route::get('/project/projectDetail/{project:projectId}', 'index')->name('projectDetail.index')->middleware('auth');
+    Route::get('/project/projectDetail/add/{project:projectId}', 'add')->name('projectDetail.add')->middleware('auth');
+    Route::post('/project/projectDetail/save/{project:projectId}', 'save')->name('projectDetail.save')->middleware('auth');
+});
+
+Route::controller(ReportController::class)->group(function() {
+    Route::get('/project/projectDetail/report/{report:reportId}', 'index')->name('report.index')->middleware('auth');
 });
 
 

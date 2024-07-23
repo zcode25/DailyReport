@@ -10,8 +10,14 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class ProjectDetailController extends Controller
 {
     public function index(Project $project) {
+
+        $reports = Report::latest()->get();
+
+        // dd($reports);
+
         return view('projectDetails.index', [
-            'project' => $project
+            'project' => $project,
+            'reports' => $reports,
         ]);
     }
 
@@ -26,8 +32,8 @@ class ProjectDetailController extends Controller
             'date' => ['required']
         ]);
 
-        $reportId = IdGenerator::generate(['table' => 'reports', 'field' => 'reportId', 'length' => 20, 'prefix' => 'RPT/'. date('y/m/d', strtotime($request->date)) . '/']);
-        
+        $reportId = IdGenerator::generate(['table' => 'reports', 'field' => 'reportId', 'length' => 20, 'prefix' => 'RPT-'. date('y-m-d', strtotime($request->date)) . '-']);
+
         Report::create([
             'reportId' => $reportId,
             'projectId' => $project->projectId,

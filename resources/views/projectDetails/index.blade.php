@@ -20,8 +20,8 @@
                     <p class="mb-3"> {{ $project->projectDesc }}</p>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex flex-row content-center p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <div class="flex flex-row content-center mb-5 text-gray-900">
                     <div class="basis-1/2">
                         <p class="text-xl font-bold mb-3">Daily Reports</p>
                     </div>
@@ -31,6 +31,20 @@
                         </div>
                     </div>
                 </div>
+                @foreach ($reports as $report)
+                <div class="text-gray-900 mb-3">
+                    <div class="grid grid-cols-2 gap-4 text-gray-900 mb-3">
+                        <div>
+                            <p>Report {{ $report->date }}</p>
+                        </div>
+                        <div class="text-end">
+                            <a href="{{ route('report.index', ['report' => $report->reportId]) }}" class="btn btn-success btn-sm text-white">Detail</a>
+                        </div>
+                    </div>
+
+                </div>
+                @endforeach
+
             </div>
         </div>
     </div>
