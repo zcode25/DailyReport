@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('project.index')" :active="request()->routeIs('project*')">
+                    <x-nav-link :href="route('project.index')" :active="request()->routeIs('project*', 'report*')">
                         {{ __('Project') }}
                     </x-nav-link>
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user*')">
@@ -76,7 +76,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project*')">
+            <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project', 'report*')">
                 {{ __('Project') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user*')">

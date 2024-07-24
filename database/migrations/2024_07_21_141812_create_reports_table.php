@@ -16,6 +16,8 @@ return new class extends Migration
             $table->char('projectId', 10);
             $table->foreign('projectId')->references('projectId')->on('projects')->onUpdate('cascade')->onDelete('restrict');
             $table->date('date');
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ProjectController extends Controller
@@ -28,6 +29,8 @@ class ProjectController extends Controller
         ]);
 
         $projectId = IdGenerator::generate(['table' => 'projects', 'field' => 'projectId', 'length' => 10, 'prefix' => 'PRJ']);
+        $userId = Auth::user()->id;
+
 
         Project::create([
             'projectId'         => $projectId,
@@ -35,8 +38,8 @@ class ProjectController extends Controller
             'projectAddress'    => $request->projectAddress,
             'customer'          => $request->customer,
             'address'           => $request->address,
-            'projectDesc'       => $request->projectDesc
-
+            'projectDesc'       => $request->projectDesc,
+            'userId'            => $userId,
         ]);
 
         return redirect(route('project.index', absolute: false))->with('success', 'Data successfully added');

@@ -21,9 +21,9 @@
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="flex flex-row content-center mb-5 text-gray-900">
+                <div class="flex flex-row content-center text-gray-900">
                     <div class="basis-1/2">
-                        <p class="text-xl font-bold mb-3">Daily Reports</p>
+                        <p class="text-xl font-bold">Daily Reports</p>
                     </div>
                     <div class="basis-1/2">
                         <div class="text-end">
@@ -32,8 +32,8 @@
                     </div>
                 </div>
                 @foreach ($reports as $report)
-                <div class="text-gray-900 mb-3">
-                    <div class="grid grid-cols-2 gap-4 text-gray-900 mb-3">
+                <div class="text-gray-900 mt-3">
+                    <div class="grid grid-cols-2 gap-4 text-gray-900">
                         <div>
                             <p>Report {{ $report->date }}</p>
                         </div>

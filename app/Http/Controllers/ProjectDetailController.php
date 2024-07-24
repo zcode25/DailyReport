@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
 use App\Models\Report;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ProjectDetailController extends Controller
@@ -33,11 +34,13 @@ class ProjectDetailController extends Controller
         ]);
 
         $reportId = IdGenerator::generate(['table' => 'reports', 'field' => 'reportId', 'length' => 20, 'prefix' => 'RPT-'. date('y-m-d', strtotime($request->date)) . '-']);
+        $userId = Auth::user()->id;
 
         Report::create([
             'reportId' => $reportId,
             'projectId' => $project->projectId,
             'date' => $request->date,
+            'userId' => $userId,
         ]);
 
         return redirect(route('projectDetail.index', ['project' => $project->projectId], absolute: false))->with('success', 'Data successfully updated');

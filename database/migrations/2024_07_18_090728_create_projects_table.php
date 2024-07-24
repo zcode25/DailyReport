@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('customer');
             $table->string('address');
             $table->text('projectDesc');
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Report extends Model
 {
@@ -12,4 +13,8 @@ class Report extends Model
     protected $primaryKey = 'reportId';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    public function project(){
+        return $this->belongsTo(Project::class, 'projectId');
+    }
 }
