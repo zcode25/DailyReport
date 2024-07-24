@@ -26,14 +26,6 @@
                     </div>
 
                     <div class="mb-4">
-                      <label class="block text-gray-700 mb-2" for="projectAddress">Project Address</label>
-                      <input class="input input-bordered w-full bg-white @error('projectAddress') input-error @enderror" type="text" id="projectAddress" name="projectAddress" value="{{ old('projectAddress') }}">
-                      @error('projectAddress')
-                        <div class="text-rose-500 text-sm">{{ $message }}</div>
-                      @enderror
-                    </div>
-
-                    <div class="mb-4">
                       <label class="block text-gray-700 mb-2" for="customer">Customer</label>
                       <input class="input input-bordered w-full bg-white @error('projectAddress') input-error @enderror" type="text" id="customer" name="customer" value="{{ old('customer') }}">
                       @error('customer')
@@ -50,13 +42,21 @@
                     </div>
 
                     <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="period">Period</label>
+                        <input class="input input-bordered w-full bg-white @error('projectperiod') input-error @enderror" type="text" id="period" name="period" value="{{ old('period') }}">
+                        @error('period')
+                          <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
                       <label class="block text-gray-700 mb-2" for="projectDesc">Project Description</label>
                       <textarea class="textarea textarea-bordered w-full bg-white @error('projectDesc') input-error @enderror" id="projectDesc" name="projectDesc" rows="4">{{ old('projectDesc') }}</textarea>
                       @error('projectDesc')
                         <div class="text-rose-500 text-sm">{{ $message }}</div>
                       @enderror
                     </div>
-                    
+
                     <div class="flex flex-row content-center">
                       <div class="basis-1/2">
                           <a href="{{ route('project.index') }}" class="btn btn-ghost">Back</a>

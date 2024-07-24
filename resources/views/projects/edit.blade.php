@@ -26,14 +26,6 @@
                     </div>
 
                     <div class="mb-4">
-                      <label class="block text-gray-700 mb-2" for="projectAddress">Project Address</label>
-                      <input class="input input-bordered w-full bg-white @error('projectAddress') input-error @enderror" type="text" id="projectAddress" name="projectAddress" value="{{ old('projectAddress', $project->projectAddress) }}">
-                      @error('projectAddress')
-                        <div class="text-rose-500 text-sm">{{ $message }}</div>
-                      @enderror
-                    </div>
-
-                    <div class="mb-4">
                       <label class="block text-gray-700 mb-2" for="customer">Customer</label>
                       <input class="input input-bordered w-full bg-white @error('projectAddress') input-error @enderror" type="text" id="customer" name="customer" value="{{ old('customer', $project->customer) }}">
                       @error('customer')
@@ -47,7 +39,15 @@
                         @error('address')
                           <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
-                      </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="period">Period</label>
+                        <input class="input input-bordered w-full bg-white @error('projectperiod') input-error @enderror" type="text" id="period" name="period" value="{{ old('period', $project->period) }}">
+                        @error('period')
+                          <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="mb-4">
                       <label class="block text-gray-700 mb-2" for="projectDesc">Project Description</label>

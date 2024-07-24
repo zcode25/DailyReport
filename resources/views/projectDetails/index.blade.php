@@ -10,12 +10,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-3">
                 <div class="p-6 text-gray-900">
                     <h2 class="text-xl font-bold mb-3">{{ $project->projectName }}</h2>
-                    <p class="font-bold">Project Address</p>
-                    <p class="mb-3"> {{ $project->projectAddress }}</p>
                     <p class="font-bold">Customer</p>
                     <p class="mb-3"> {{ $project->customer }}</p>
                     <p class="font-bold">Address</p>
                     <p class="mb-3"> {{ $project->address }}</p>
+                    <p class="font-bold">Period</p>
+                    <p class="mb-3"> {{ $project->period }}</p>
                     <p class="font-bold">Description</p>
                     <p class="mb-3"> {{ $project->projectDesc }}</p>
                 </div>
@@ -33,7 +33,7 @@
                 </div>
                 @foreach ($reports as $report)
                 <div class="text-gray-900 mt-3">
-                    <div class="grid grid-cols-2 gap-4 text-gray-900">
+                    <div class="grid grid-cols-2 gap-2 text-gray-900">
                         <div>
                             <p>Report {{ $report->date }}</p>
                         </div>

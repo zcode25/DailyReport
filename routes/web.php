@@ -39,6 +39,7 @@ Route::controller(ProjectDetailController::class)->group(function() {
 Route::controller(ReportController::class)->group(function() {
     Route::get('/project/projectDetail/report/{report:reportId}', 'index')->name('report.index')->middleware('auth');
     Route::get('/project/projectDetail/report/manpower/{report:reportId}', 'manpower')->name('report.manpower')->middleware('auth');
+    Route::post('/project/projectDetail/report/manpower/save/{report:reportId}', 'manpowerSave')->name('report.manpower.save')->middleware('auth');
 });
 
 

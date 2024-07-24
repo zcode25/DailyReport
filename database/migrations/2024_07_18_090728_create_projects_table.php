@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->char('projectId', 10)->primary();
             $table->string('projectName');
-            $table->text('projectAddress');
             $table->string('customer');
             $table->string('address');
+            $table->string('period');
             $table->text('projectDesc');
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');

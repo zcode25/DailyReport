@@ -22,9 +22,9 @@ class ProjectController extends Controller
     public function save(Request $request) {
         $request->validate([
             'projectName' => ['required', 'string', 'max:255'],
-            'projectAddress' => ['required', 'string', 'max:255'],
             'customer' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
+            'period' => ['required', 'string', 'max:255'],
             'projectDesc' => ['required', 'string', 'max:255'],
         ]);
 
@@ -35,9 +35,9 @@ class ProjectController extends Controller
         Project::create([
             'projectId'         => $projectId,
             'projectName'       => $request->projectName,
-            'projectAddress'    => $request->projectAddress,
             'customer'          => $request->customer,
             'address'           => $request->address,
+            'period'            => $request->period,
             'projectDesc'       => $request->projectDesc,
             'userId'            => $userId,
         ]);
@@ -54,17 +54,17 @@ class ProjectController extends Controller
     Public function update(Request $request, Project $project) {
         $request->validate([
             'projectName' => ['required', 'string', 'max:255'],
-            'projectAddress' => ['required', 'string', 'max:255'],
             'customer' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
+            'period' => ['required', 'string', 'max:255'],
             'projectDesc' => ['required', 'string', 'max:255'],
         ]);
 
         Project::where('projectId', $project->projectId)->update([
             'projectName'       => $request->projectName,
-            'projectAddress'    => $request->projectAddress,
             'customer'          => $request->customer,
             'address'           => $request->address,
+            'period'            => $request->period,
             'projectDesc'       => $request->projectDesc
 
         ]);
