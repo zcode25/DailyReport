@@ -55,4 +55,14 @@ class ReportController extends Controller
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
+
+    public function ppe(Report $report) {
+        return view('reports.ppe', [
+            'report' => $report
+        ]);
+    }
+
+    public function ppeSave(Request $request, Report $report) {
+        dd($request);
+    }
 }

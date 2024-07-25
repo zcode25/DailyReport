@@ -20,7 +20,7 @@
                     <p class="mb-3"> {{ $report->project->projectDesc }}</p>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
                 <div class="flex flex-row content-center text-gray-900">
                     <div class="basis-1/2">
                         <p class="text-xl font-bold">Mainpower</p>
@@ -118,11 +118,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="flex flex-row content-center text-gray-900">
                     <div class="basis-1/2">
-                        <p class="text-xl font-bold">Mainpower</p>
+                        <p class="text-xl font-bold">PPE</p>
                     </div>
                     <div class="basis-1/2">
                         <div class="text-end">
-                            <a href="{{ route('report.manpower', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                            <a href="{{ route('report.ppe', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
                         </div>
                     </div>
                 </div>
