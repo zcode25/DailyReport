@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ppe;
 use App\Models\Report;
 use App\Models\Manpower;
 use Illuminate\Http\Request;
@@ -11,17 +12,13 @@ class ReportController extends Controller
 {
     public function index(Report $report) {
 
-        $manpowers = Manpower::latest()->get();
+        $manpower = Manpower::where('reportId', $report->reportId)->first();
+        $ppe = Ppe::where('reportId', $report->reportId)->first();
 
         return view('reports.index', [
             'report' => $report,
-            'manpowers' => $manpowers
-        ]);
-    }
-
-    public function manpower(Report $report) {
-        return view('reports.manpower', [
-            'report' => $report
+            'manpower' => $manpower,
+            'ppe' => $ppe
         ]);
     }
 
@@ -39,30 +36,54 @@ class ReportController extends Controller
 
         $manpowerId = IdGenerator::generate(['table' => 'manpowers', 'field' => 'manpowerId', 'length' => 10, 'prefix' => 'MPW']);
 
-        Manpower::create([
-            'manpowerId' => $manpowerId,
-            'reportId' => $report->reportId,
-            'projectManager' => $request->projectManager,
-            'siteManager' => $request->siteManager,
-            'supervisor' => $request->supervisor,
-            'surveyor' => $request->surveyor,
-            'safety' => $request->safety,
-            'civil' => $request->civil,
-            'mechanical' => $request->mechanical,
-            'operator' => $request->operator
-        ]);
+        Manpower::updateOrCreate(
+            ['reportId' => $report->reportId],
+            [
+                'manpowerId' => $manpowerId,
+                'projectManager' => $request->projectManager,
+                'siteManager' => $request->siteManager,
+                'supervisor' => $request->supervisor,
+                'surveyor' => $request->surveyor,
+                'safety' => $request->safety,
+                'civil' => $request->civil,
+                'mechanical' => $request->mechanical,
+                'operator' => $request->operator
+            ]
+        );
 
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
 
-    public function ppe(Report $report) {
-        return view('reports.ppe', [
-            'report' => $report
-        ]);
-    }
-
     public function ppeSave(Request $request, Report $report) {
-        dd($request);
+        $request->validate([
+            'helm' => ['required'],
+            'uniform' => ['required'],
+            'vest' => ['required'],
+            'safetyShoes' => ['required'],
+            'safetyGoggles' => ['required'],
+            'glove' => ['required'],
+            'safetyMask' => ['required'],
+            'earPlug' => ['required'],
+        ]);
+
+        $ppeId = IdGenerator::generate(['table' => 'ppes', 'field' => 'ppeId', 'length' => 10, 'prefix' => 'MPW']);
+
+        Ppe::updateOrCreate(
+            ['reportId' => $report->reportId,],
+            [
+                'ppeId' => $ppeId,
+                'helm' => $request->helm,
+                'uniform' => $request->uniform,
+                'vest' => $request->vest,
+                'safetyShoes' => $request->safetyShoes,
+                'safetyGoggles' => $request->safetyGoggles,
+                'glove' => $request->glove,
+                'safetyMask' => $request->safetyMask,
+                'earPlug' => $request->earPlug,
+            ]
+        );
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
 }

@@ -12,7 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ppes', function (Blueprint $table) {
-            $table->id();
+            $table->char('ppeId', 10)->primary();
+            $table->char('reportId', 20);
+            $table->boolean('helm');
+            $table->boolean('uniform');
+            $table->boolean('vest');
+            $table->boolean('safetyShoes');
+            $table->boolean('safetyGoggles');
+            $table->boolean('glove');
+            $table->boolean('safetyMask');
+            $table->boolean('earPlug');
             $table->timestamps();
         });
     }
