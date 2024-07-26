@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Equipment extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    protected $primaryKey = 'equipmentId';
+    public $incrementing = false;
+    protected $keyType = 'string';
 }

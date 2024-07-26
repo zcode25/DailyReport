@@ -141,7 +141,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Uniform</span>
                             <input type="hidden" name="uniform" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('uniform') input-error @enderror" id="uniform" name="uniform" value="1" {{ old('uniform', $ppe->uniform) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('uniform') input-error @enderror" id="uniform" name="uniform" value="1" {{ old('uniform', $ppe->uniform ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('uniform')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -152,7 +152,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Vest</span>
                             <input type="hidden" name="vest" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('vest') input-error @enderror" id="vest" name="vest" value="1" {{ old('vest', $ppe->vest) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('vest') input-error @enderror" id="vest" name="vest" value="1" {{ old('vest', $ppe->vest ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('vest')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -163,7 +163,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Safety Shoes</span>
                             <input type="hidden" name="safetyShoes" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('safetyShoes') input-error @enderror" id="safetyShoes" name="safetyShoes" value="1" {{ old('safetyShoes', $ppe->safetyShoes) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('safetyShoes') input-error @enderror" id="safetyShoes" name="safetyShoes" value="1" {{ old('safetyShoes', $ppe->safetyShoes ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('safetyShoes')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -174,7 +174,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Safety Goggles</span>
                             <input type="hidden" name="safetyGoggles" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('safetyGoggles') input-error @enderror" id="safetyGoggles" name="safetyGoggles" value="1" {{ old('safetyGoggles', $ppe->safetyGoggles) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('safetyGoggles') input-error @enderror" id="safetyGoggles" name="safetyGoggles" value="1" {{ old('safetyGoggles', $ppe->safetyGoggles ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('safetyGoggles')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -185,7 +185,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Glove</span>
                             <input type="hidden" name="glove" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('glove') input-error @enderror" id="glove" name="glove" value="1" {{ old('glove', $ppe->glove) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('glove') input-error @enderror" id="glove" name="glove" value="1" {{ old('glove', $ppe->glove ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('glove')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -196,7 +196,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Safety Mask</span>
                             <input type="hidden" name="safetyMask" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('safetyMask') input-error @enderror" id="safetyMask" name="safetyMask" value="1" {{ old('safetyMask', $ppe->safetyMask) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('safetyMask') input-error @enderror" id="safetyMask" name="safetyMask" value="1" {{ old('safetyMask', $ppe->safetyMask ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('safetyMask')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -207,7 +207,7 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">Ear Plug</span>
                             <input type="hidden" name="earPlug" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary @error('earPlug') input-error @enderror" id="earPlug" name="earPlug" value="1" {{ old('earPlug', $ppe->earPlug) == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-primary @error('earPlug') input-error @enderror" id="earPlug" name="earPlug" value="1" {{ old('earPlug', $ppe->earPlug ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                         @error('earPlug')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
@@ -221,7 +221,7 @@
                 </form>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
-                <form method="post" action="{{ route('report.manpower.save', ['report' => $report->reportId]) }}">
+                <form method="post" action="{{ route('report.equipment.save', ['report' => $report->reportId]) }}">
                 @csrf
                 <div class="flex flex-row content-center text-gray-900 mb-5">
                     <p class="text-xl font-bold">Equipment</p>
@@ -231,7 +231,7 @@
                         <p>Exca</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('exca') input-error @enderror" type="number" id="exca" name="exca" value="{{ old('exca', $manpower->exca ?? '') }}">
+                        <input class="input input-bordered w-full bg-white @error('exca') input-error @enderror" type="number" id="exca" name="exca" value="{{ old('exca', $equipment->exca ?? '') }}">
                         @error('exca')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
@@ -242,7 +242,7 @@
                         <p>Buldozer</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('buldozer') input-error @enderror" type="text" id="buldozer" name="buldozer" value="{{ old('buldozer', $manpower->buldozer ?? '') }}">
+                        <input class="input input-bordered w-full bg-white @error('buldozer') input-error @enderror" type="number" id="buldozer" name="buldozer" value="{{ old('buldozer', $equipment->buldozer ?? '') }}">
                         @error('buldozer')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
@@ -253,7 +253,7 @@
                         <p>Vibro</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('vibro') input-error @enderror" type="text" id="vibro" name="vibro" value="{{ old('vibro', $manpower->vibro ?? '') }}">
+                        <input class="input input-bordered w-full bg-white @error('vibro') input-error @enderror" type="number" id="vibro" name="vibro" value="{{ old('vibro', $equipment->vibro ?? '') }}">
                         @error('vibro')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
@@ -264,7 +264,7 @@
                         <p>Truck</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('truck') input-error @enderror" type="text" id="truck" name="truck" value="{{ old('truck', $manpower->truck ?? '') }}">
+                        <input class="input input-bordered w-full bg-white @error('truck') input-error @enderror" type="number" id="truck" name="truck" value="{{ old('truck', $equipment->truck ?? '') }}">
                         @error('truck')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
@@ -272,48 +272,81 @@
                 </div>
                 <div class="text-gray-900 mb-3">
                     <div class="mb-3">
-                        <p>Safety</p>
+                        <p>Pick up</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('safety') input-error @enderror" type="text" id="safety" name="safety" value="{{ old('safety', $manpower->safety ?? '') }}">
-                        @error('safety')
+                        <input class="input input-bordered w-full bg-white @error('pickup') input-error @enderror" type="number" id="pickup" name="pickup" value="{{ old('pickup', $equipment->pickup ?? '') }}">
+                        @error('pickup')
                             <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="text-gray-900 mb-3">
                     <div class="mb-3">
-                        <p>Civil</p>
+                        <p>Crane</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('civil') input-error @enderror" type="text" id="civil" name="civil" value="{{ old('civil',  $manpower->civil ?? '') }}">
-                        @error('civil')
+                        <input class="input input-bordered w-full bg-white @error('crane') input-error @enderror" type="number" id="crane" name="crane" value="{{ old('crane',  $equipment->crane ?? '') }}">
+                        @error('crane')
                           <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="text-gray-900 mb-3">
                     <div class="mb-3">
-                        <p>Mechanical</p>
+                        <p>Forklift</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('mechanical') input-error @enderror" type="text" id="mechanical" name="mechanical" value="{{ old('mechanical', $manpower->mechanical ?? '') }}">
-                        @error('mechanical')
+                        <input class="input input-bordered w-full bg-white @error('forklift') input-error @enderror" type="number" id="forklift" name="forklift" value="{{ old('forklift', $equipment->forklift ?? '') }}">
+                        @error('forklift')
                           <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
                 <div class="text-gray-900 mb-5">
                     <div class="mb-3">
-                        <p>Operator</p>
+                        <p>Pancang</p>
                     </div>
                     <div>
-                        <input class="input input-bordered w-full bg-white @error('operator') input-error @enderror" type="text" id="operator" name="operator" value="{{ old('operator', $manpower->operator ?? '') }}">
-                        @error('operator')
+                        <input class="input input-bordered w-full bg-white @error('pancang') input-error @enderror" type="number" id="pancang" name="pancang" value="{{ old('pancang', $equipment->pancang ?? '') }}">
+                        @error('pancang')
                           <div class="text-rose-500 text-sm">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
+                <div class="div">
+                    <button class="w-full btn btn-primary text-white">Save</button>
+                </div>
+                </form>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
+                <form method="post" action="{{ route('report.equipment.save', ['report' => $report->reportId]) }}">
+                @csrf
+                <div class="flex flex-row content-center text-gray-900 mb-5">
+                    <p class="text-xl font-bold">Weather</p>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">8:00 ~ 9:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio" id="weatherBright" name="weather" value="bright" {{ old('weather', $ppe->weather ?? '') == 'bright' ? 'checked' : '' }}>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio" id="weatherRain" name="weather" value="rain" {{ old('weather', $ppe->weather ?? '') == 'rain' ? 'checked' : '' }}>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
                 </div>

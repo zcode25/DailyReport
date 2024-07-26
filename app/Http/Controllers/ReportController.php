@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ppe;
 use App\Models\Report;
 use App\Models\Manpower;
+use App\Models\Equipment;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -14,11 +15,13 @@ class ReportController extends Controller
 
         $manpower = Manpower::where('reportId', $report->reportId)->first();
         $ppe = Ppe::where('reportId', $report->reportId)->first();
+        $equipment = Equipment::where('reportId', $report->reportId)->first();
 
         return view('reports.index', [
             'report' => $report,
             'manpower' => $manpower,
-            'ppe' => $ppe
+            'ppe' => $ppe,
+            'equipment' => $equipment
         ]);
     }
 
@@ -67,7 +70,7 @@ class ReportController extends Controller
             'earPlug' => ['required'],
         ]);
 
-        $ppeId = IdGenerator::generate(['table' => 'ppes', 'field' => 'ppeId', 'length' => 10, 'prefix' => 'MPW']);
+        $ppeId = IdGenerator::generate(['table' => 'ppes', 'field' => 'ppeId', 'length' => 10, 'prefix' => 'PPE']);
 
         Ppe::updateOrCreate(
             ['reportId' => $report->reportId,],
@@ -81,6 +84,38 @@ class ReportController extends Controller
                 'glove' => $request->glove,
                 'safetyMask' => $request->safetyMask,
                 'earPlug' => $request->earPlug,
+            ]
+        );
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function equipmentSave(Request $request, Report $report) {
+        $request->validate([
+            'exca' => ['required'],
+            'buldozer' => ['required'],
+            'vibro' => ['required'],
+            'truck' => ['required'],
+            'pickup' => ['required'],
+            'crane' => ['required'],
+            'forklift' => ['required'],
+            'pancang' => ['required'],
+        ]);
+
+        $equipmentId = IdGenerator::generate(['table' => 'equipment', 'field' => 'equipmentId', 'length' => 10, 'prefix' => 'EQP']);
+
+        Equipment::updateOrCreate(
+            ['reportId' => $report->reportId,],
+            [
+                'equipmentId' => $equipmentId,
+                'exca' => $request->exca,
+                'buldozer' => $request->buldozer,
+                'vibro' => $request->vibro,
+                'truck' => $request->truck,
+                'pickup' => $request->pickup,
+                'crane' => $request->crane,
+                'forklift' => $request->forklift,
+                'pancang' => $request->pancang,
             ]
         );
 
