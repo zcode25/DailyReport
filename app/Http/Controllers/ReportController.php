@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ppe;
 use App\Models\Report;
+use App\Models\Weather;
 use App\Models\Manpower;
 use App\Models\Equipment;
 use Illuminate\Http\Request;
@@ -16,12 +17,14 @@ class ReportController extends Controller
         $manpower = Manpower::where('reportId', $report->reportId)->first();
         $ppe = Ppe::where('reportId', $report->reportId)->first();
         $equipment = Equipment::where('reportId', $report->reportId)->first();
+        $weather = Weather::where('reportId', $report->reportId)->first();
 
         return view('reports.index', [
             'report' => $report,
             'manpower' => $manpower,
             'ppe' => $ppe,
-            'equipment' => $equipment
+            'equipment' => $equipment,
+            'weather' => $weather
         ]);
     }
 
@@ -116,6 +119,76 @@ class ReportController extends Controller
                 'crane' => $request->crane,
                 'forklift' => $request->forklift,
                 'pancang' => $request->pancang,
+            ]
+        );
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function weatherSave(Request $request, Report $report) {
+
+        // dd($request);
+
+        // $request->validate([
+        //     'time1' => ['required'],
+        //     'time2' => ['required'],
+        //     'time3' => ['required'],
+        //     'time4' => ['required'],
+        //     'time5' => ['required'],
+        //     'time6' => ['required'],
+        //     'time7' => ['required'],
+        //     'time8' => ['required'],
+        //     'time9' => ['required'],
+        //     'time10' => ['required'],
+        //     'time11' => ['required'],
+        //     'time12' => ['required'],
+        // ]);
+
+        $weatherId = IdGenerator::generate(['table' => 'weather', 'field' => 'weatherId', 'length' => 10, 'prefix' => 'WAT']);
+
+        Weather::updateOrCreate(
+            ['reportId' => $report->reportId,],
+            [
+                'weatherId' => $weatherId,
+                'time1' => $request->time1,
+                'time2' => $request->time2,
+                'time3' => $request->time3,
+                'time4' => $request->time4,
+                'time5' => $request->time5,
+                'time6' => $request->time6,
+                'time7' => $request->time7,
+                'time8' => $request->time8,
+                'time9' => $request->time9,
+                'time10' => $request->time10,
+                'time11' => $request->time11,
+                'time12' => $request->time12,
+            ]
+        );
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    function chemicalSave(Request $request, Report $report) {
+        $request->validate([
+            'dust' => ['required'],
+            'fluid' => ['required'],
+            'gas' => ['required'],
+        ]);
+
+        $chemicalId = IdGenerator::generate(['table' => 'chemicals', 'field' => 'chemicalId', 'length' => 10, 'prefix' => 'CMH']);
+
+        Ppe::updateOrCreate(
+            ['reportId' => $report->reportId,],
+            [
+                'ppeId' => $ppeId,
+                'dust' => $request->dust,
+                'uniform' => $request->uniform,
+                'vest' => $request->vest,
+                'safetyShoes' => $request->safetyShoes,
+                'safetyGoggles' => $request->safetyGoggles,
+                'glove' => $request->glove,
+                'safetyMask' => $request->safetyMask,
+                'earPlug' => $request->earPlug,
             ]
         );
 

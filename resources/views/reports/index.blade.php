@@ -320,7 +320,7 @@
                 </form>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
-                <form method="post" action="{{ route('report.equipment.save', ['report' => $report->reportId]) }}">
+                <form method="post" action="{{ route('report.weather.save', ['report' => $report->reportId]) }}">
                 @csrf
                 <div class="flex flex-row content-center text-gray-900 mb-5">
                     <p class="text-xl font-bold">Weather</p>
@@ -331,7 +331,26 @@
                         <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="label-text text-gray-700">Bright</span>
-                                <input type="radio" class="radio" id="weatherBright" name="weather" value="bright" {{ old('weather', $ppe->weather ?? '') == 'bright' ? 'checked' : '' }}>
+                                <input type="radio" class="radio radio-primary" id="time1-0" name="time1" value="0" @if ((string)($weather->time1 ?? '') === '0') checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time1-1" name="time1" value="1" @if ((string)($weather->time1 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">9:00 - 10:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time2-0" name="time2" value="0" @if ((string)($weather->time2 ?? '') === '0') checked @endif>
                             </label>
                         </div>
                     </div>
@@ -339,16 +358,252 @@
                         <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="text-gray-700 text-center">Rain</span>
-                                <input type="radio" class="radio" id="weatherRain" name="weather" value="rain" {{ old('weather', $ppe->weather ?? '') == 'rain' ? 'checked' : '' }}>
+                                <input type="radio" class="radio radio-primary" id="time2-1" name="time2" value="1" @if ((string)($weather->time2 ?? '') === '1') checked @endif>
                             </label>
                         </div>
                     </div>
                 </div>
-                
-                
-                
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">10:00 - 11:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time3-0" name="time3" value="0" @if ((string)($weather->time3 ?? '') === '0') checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time3-1" name="time3" value="1" @if ((string)($weather->time3 ?? '') === '1') checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">11:00 - 12:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time4-0" name="time4" value="0" @if ((string)($weather->time4 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time4-1" name="time4" value="1" @if ((string)($weather->time4 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">13:00 - 14:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time5-0" name="time5" value="0" @if ((string)($weather->time5 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time5-1" name="time5" value="1" @if ((string)($weather->time5 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">14:00 - 15:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time6-0" name="time6" value="0" @if ((string)($weather->time6 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time6-1" name="time6" value="1" @if ((string)($weather->time6 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">15:00 - 16:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time7-0" name="time7" value="0" @if ((string)($weather->time7 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time7-1" name="time7" value="1" @if ((string)($weather->time7 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">16:00 - 17:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time8-0" name="time8" value="0" @if ((string)($weather->time8 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time8-1" name="time8" value="1" @if ((string)($weather->time8 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">17:00 - 18:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time9-0" name="time9" value="0" @if ((string)($weather->time9 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time9-1" name="time9" value="1" @if ((string)($weather->time9 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">19:00 - 20:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time10-0" name="time10" value="0" @if ((string)($weather->time10 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time10-1" name="time10" value="1" @if ((string)($weather->time10 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">20:00 - 21:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time11-0" name="time11" value="0" @if ((string)($weather->time11 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time11-1" name="time11" value="1" @if ((string)($weather->time11 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-gray-700 mb-3">
+                    <div class="label">21:00 - 22:00</div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-gray-700">Bright</span>
+                                <input type="radio" class="radio radio-primary" id="time12-0" name="time12" value="0" @if ((string)($weather->time12 ?? '') === '0' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-control">
+                            <label class="label cursor-pointer">
+                                <span class="text-gray-700 text-center">Rain</span>
+                                <input type="radio" class="radio radio-primary" id="time12-1" name="time12" value="1" @if ((string)($weather->time12 ?? '') === '1' ) checked @endif>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
+                </div>
+                </form>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
+                <form method="post" action="{{ route('report.ppe.save', ['report' => $report->reportId]) }}">
+                @csrf
+                <div class="flex flex-row content-center text-gray-900">
+                    <p class="text-xl font-bold">Kimia</p>
+                </div>
+                <div class="text-gray-900 mt-3">
+                    <div class="form-control mb-1">
+                        <label class="label cursor-pointer">
+                            <span class="label-text text-gray-700 text-lg">Debu</span>
+                            <input type="hidden" name="dust" value="0">
+                            <input type="checkbox" class="checkbox checkbox-primary @error('dust') input-error @enderror" id="dust" name="dust" value="1" {{ old('dust', $ppe->dust ?? '') == '1' ? 'checked' : '' }}>
+                        </label>
+                        @error('dust')
+                            <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-control mb-1">
+                        <label class="label cursor-pointer">
+                            <span class="label-text text-gray-700 text-lg">Cairan</span>
+                            <input type="hidden" name="fluid" value="0">
+                            <input type="checkbox" class="checkbox checkbox-primary @error('fluid') input-error @enderror" id="fluid" name="fluid" value="1" {{ old('fluid', $ppe->fluid ?? '') == '1' ? 'checked' : '' }}>
+                        </label>
+                        @error('fluid')
+                            <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-control mb-1">
+                        <label class="label cursor-pointer">
+                            <span class="label-text text-gray-700 text-lg">Gas</span>
+                            <input type="hidden" name="gas" value="0">
+                            <input type="checkbox" class="checkbox checkbox-primary @error('gas') input-error @enderror" id="gas" name="gas" value="1" {{ old('gas', $ppe->gas ?? '') == '1' ? 'checked' : '' }}>
+                        </label>
+                        @error('gas')
+                            <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+                    <div class="div">
+                        <button class="w-full btn btn-primary text-white">Save</button>
+                    </div>
+
                 </div>
                 </form>
             </div>

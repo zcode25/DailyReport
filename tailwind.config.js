@@ -22,4 +22,8 @@ export default {
         forms,
         daisyui,
     ],
+
+    daisyui: {
+        themes: ["light"], // Set theme to light
+    },
 };
