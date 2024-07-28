@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Weather extends Model
+class Ergonomy extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'weatherId';
+    protected $primaryKey = 'ergonomyId';
     public $incrementing = true;
     protected $keyType = 'string';
 }

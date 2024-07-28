@@ -10,6 +10,6 @@ class Equipment extends Model
     use HasFactory;
     protected $guarded = [];
     protected $primaryKey = 'equipmentId';
-    public $incrementing = false;
+    public $incrementing =true;
     protected $keyType = 'string';
 }

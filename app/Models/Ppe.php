@@ -10,6 +10,6 @@ class Ppe extends Model
     use HasFactory;
     protected $guarded = [];
     protected $primaryKey = 'ppeId';
-    public $incrementing = false;
+    public $incrementing = true;
     protected $keyType = 'string';
 }

@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Ppe;
 use App\Models\Report;
+use App\Models\Biology;
+use App\Models\Physics;
 use App\Models\Weather;
+use App\Models\Behavior;
+use App\Models\Chemical;
+use App\Models\Ergonomy;
 use App\Models\Manpower;
+use App\Models\Question;
+use App\Models\Condition;
 use App\Models\Equipment;
+use App\Models\Psikology;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -14,183 +22,528 @@ class ReportController extends Controller
 {
     public function index(Report $report) {
 
-        $manpower = Manpower::where('reportId', $report->reportId)->first();
-        $ppe = Ppe::where('reportId', $report->reportId)->first();
-        $equipment = Equipment::where('reportId', $report->reportId)->first();
-        $weather = Weather::where('reportId', $report->reportId)->first();
+        $manpowers = [
+            ["type" => "Project Manager"],
+            ["type" => "Site Manager"],
+            ["type" => "Supervisor"],
+            ["type" => "Surveyor"],
+            ["type" => "Safety"],
+            ["type" => "Mechanical"],
+            ["type" => "Operator"],
+        ];
+
+        $ppes = [
+            ["type" => "Helm"],
+            ["type" => "Uniform"],
+            ["type" => "Vest"],
+            ["type" => "Safety Shoes"],
+            ["type" => "Safety Goggles"],
+            ["type" => "Glove"],
+            ["type" => "Safety Mask"],
+            ["type" => "Ear Plug"],
+        ];
+
+        $equipments = [
+            ["type" => "Exca"],
+            ["type" => "Buldozer"],
+            ["type" => "Vibro"],
+            ["type" => "Truck"],
+            ["type" => "Pick up"],
+            ["type" => "Crane"],
+            ["type" => "Forklift"],
+            ["type" => "Pancang"],
+        ];
+
+        $weathers = [
+            ["type" => "8:00 - 9:00"],
+            ["type" => "9:00 - 10:00"],
+            ["type" => "10:00 - 11:00"],
+            ["type" => "11:00 - 12:00"],
+            ["type" => "13:00 - 14:00"],
+            ["type" => "14:00 - 15:00"],
+            ["type" => "16:00 - 17:00"],
+            ["type" => "17:00 - 18:00"],
+            ["type" => "19:00 - 20:00"],
+            ["type" => "20:00 - 21:00"],
+            ["type" => "21:00 - 22:00"],
+        ];
+
+        $chemicals = [
+            ["type" => "Debu"],
+            ["type" => "Cairan"],
+            ["type" => "Gas"],
+        ];
+
+        $physics = [
+            ["type" => "Iklim Kerja"],
+            ["type" => "Kebisingan"],
+            ["type" => "Getaran"],
+            ["type" => "Gelombang"],
+            ["type" => "Tekanan Udara"],
+            ["type" => "Pencahayaan"],
+        ];
+
+        $biologys = [
+            ["type" => "Mikroorganisme"],
+            ["type" => "Arthopoda"],
+            ["type" => "Hewan Invertebrata"],
+            ["type" => "Alergi"],
+            ["type" => "Binatang berbisa"],
+            ["type" => "Binatang buas"],
+        ];
+
+        $psikologys = [
+            ["type" => "Gangguan internal"],
+            ["type" => "Gangguan external"],
+            ["type" => "Lingkungan kerja"],
+        ];
+
+
+        $ergonomys = [
+            ["type" => "Cara kerja"],
+            ["type" => "Posisi kerja"],
+            ["type" => "Alat kerja"],
+            ["type" => "Beban angkat"],
+        ];
+
+        $behaviors = [
+            ["type" => "Unsafe condition"],
+            ["type" => "Unsafe action"],
+            ["type" => "Safety violation"],
+        ];
+
+        $conditions = [
+            ["type" => "Safe"],
+            ["type" => "Minor injury"],
+            ["type" => "Major injury"],
+            ["type" => "Near miss"],
+            ["type" => "Fatality"],
+        ];
+
+        $questions = [
+            ["type" => "Apakah pekerja telah menggunakan Alat pelindung diri (APD)"],
+            ["type" => "Apakah pekerja memahami resiko bahaya dari pekerjaannya"],
+            ["type" => "Apakah dilokasi kerja tersedia Alat pemadam api ringan (APAR)"],
+            ["type" => "Apakah tanda peringatan dan batas area kerja sudah terpasang"],
+            ["type" => "Apakah peralatan tangga dan perancah dalam kondisi aman"],
+            ["type" => "Apakah pekerja sudah menggunakan dan memproteksi terjatuh"],
+            ["type" => "Apakah Peralatan kerja sudah dirapihkan"],
+            ["type" => "Apakah lingkungan kerja sudah dibersihkan"],
+        ];
+
+        $manpowerData = Manpower::where('reportId', $report->reportId)->get()->keyBy('position');
+        $ppeData = Ppe::where('reportId', $report->reportId)->get()->keyBy('ppeName');
+        $equipmentData = Equipment::where('reportId', $report->reportId)->get()->keyBy('equipmentName');
+        $weatherData = Weather::where('reportId', $report->reportId)->get()->keyBy('time');
+        $chemicalData = Chemical::where('reportId', $report->reportId)->get()->keyBy('chemicalName');
+        $physicData = Physics::where('reportId', $report->reportId)->get()->keyBy('physicName');
+        $biologyData = Biology::where('reportId', $report->reportId)->get()->keyBy('biologyName');
+        $psikologyData = Psikology::where('reportId', $report->reportId)->get()->keyBy('psikologyName');
+        $ergonomyData = Ergonomy::where('reportId', $report->reportId)->get()->keyBy('ergonomyName');
+        $behaviorData = Behavior::where('reportId', $report->reportId)->get()->keyBy('behaviorName');
+        $conditionData = Condition::where('reportId', $report->reportId)->get()->keyBy('conditionName');
+        $questionData = question::where('reportId', $report->reportId)->get()->keyBy('questionName');
 
         return view('reports.index', [
             'report' => $report,
-            'manpower' => $manpower,
-            'ppe' => $ppe,
-            'equipment' => $equipment,
-            'weather' => $weather
+            'manpowers' => $manpowers,
+            'manpowerData' => $manpowerData,
+            'ppes' => $ppes,
+            'ppeData' => $ppeData,
+            'equipments' => $equipments,
+            'equipmentData' => $equipmentData,
+            'weathers' => $weathers,
+            'weatherData' => $weatherData,
+            'chemicals' => $chemicals,
+            'chemicalData' => $chemicalData, 
+            'physics' => $physics,
+            'physicData' => $physicData, 
+            'biologys' => $biologys,
+            'biologyData' => $biologyData,
+            'psikologys' => $psikologys,
+            'psikologyData' => $psikologyData,
+            'ergonomys' => $ergonomys,
+            'ergonomyData' => $ergonomyData,
+            'behaviors' => $behaviors,
+            'behaviorData' => $behaviorData,
+            'conditions' => $conditions,
+            'conditionData' => $conditionData,
+            'questions' => $questions,
+            'questionData' => $questionData,
         ]);
     }
 
     public function manpowerSave(Request $request, Report $report) {
-        $request->validate([
-            'projectManager' => ['required', 'string', 'max:255'],
-            'siteManager' => ['required', 'string', 'max:255'],
-            'supervisor' => ['required', 'string', 'max:255'],
-            'surveyor' => ['required', 'string', 'max:255'],
-            'safety' => ['required', 'string', 'max:255'],
-            'civil' => ['required', 'string', 'max:255'],
-            'mechanical' => ['required', 'string', 'max:255'],
-            'operator' => ['required', 'string', 'max:255'],
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
         ]);
 
-        $manpowerId = IdGenerator::generate(['table' => 'manpowers', 'field' => 'manpowerId', 'length' => 10, 'prefix' => 'MPW']);
 
-        Manpower::updateOrCreate(
-            ['reportId' => $report->reportId],
-            [
-                'manpowerId' => $manpowerId,
-                'projectManager' => $request->projectManager,
-                'siteManager' => $request->siteManager,
-                'supervisor' => $request->supervisor,
-                'surveyor' => $request->surveyor,
-                'safety' => $request->safety,
-                'civil' => $request->civil,
-                'mechanical' => $request->mechanical,
-                'operator' => $request->operator
-            ]
-        );
+        foreach ($validatedData['data'] as $position => $qty) {
+            $manpower = Manpower::where([
+                ['reportId', $report->reportId],
+                ['position', $position]
+            ])->first();
 
+    
+            if ($manpower) {
+                $manpower->update([
+                    'person' => $qty,
+                ]);
+            } else {
+                // $manpowerId = IdGenerator::generate(['table' => 'manpowers', 'field' => 'manpowerId', 'length' => 10, 'prefix' => 'MPW']);
+                
+                Manpower::create([
+                    'reportId' => $report->reportId,
+                    'position' => $position,
+                    'person' => $qty,
+                ]);
+            }
+        }
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
 
     public function ppeSave(Request $request, Report $report) {
-        $request->validate([
-            'helm' => ['required'],
-            'uniform' => ['required'],
-            'vest' => ['required'],
-            'safetyShoes' => ['required'],
-            'safetyGoggles' => ['required'],
-            'glove' => ['required'],
-            'safetyMask' => ['required'],
-            'earPlug' => ['required'],
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
         ]);
 
-        $ppeId = IdGenerator::generate(['table' => 'ppes', 'field' => 'ppeId', 'length' => 10, 'prefix' => 'PPE']);
+        foreach ($validatedData['data'] as $ppeName => $result) {
+            $ppe = Ppe::where([
+                ['reportId', $report->reportId],
+                ['ppeName', $ppeName]
+            ])->first();
 
-        Ppe::updateOrCreate(
-            ['reportId' => $report->reportId,],
-            [
-                'ppeId' => $ppeId,
-                'helm' => $request->helm,
-                'uniform' => $request->uniform,
-                'vest' => $request->vest,
-                'safetyShoes' => $request->safetyShoes,
-                'safetyGoggles' => $request->safetyGoggles,
-                'glove' => $request->glove,
-                'safetyMask' => $request->safetyMask,
-                'earPlug' => $request->earPlug,
-            ]
-        );
+    
+            if ($ppe) {
+                $ppe->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Ppe::create([
+                    'reportId' => $report->reportId,
+                    'ppeName' => $ppeName,
+                    'result' => $result,
+                ]);
+            }
+        }
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
 
     public function equipmentSave(Request $request, Report $report) {
-        $request->validate([
-            'exca' => ['required'],
-            'buldozer' => ['required'],
-            'vibro' => ['required'],
-            'truck' => ['required'],
-            'pickup' => ['required'],
-            'crane' => ['required'],
-            'forklift' => ['required'],
-            'pancang' => ['required'],
+        
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
         ]);
 
-        $equipmentId = IdGenerator::generate(['table' => 'equipment', 'field' => 'equipmentId', 'length' => 10, 'prefix' => 'EQP']);
+        foreach ($validatedData['data'] as $equipmentName => $result) {
+            $equipment = Equipment::where([
+                ['reportId', $report->reportId],
+                ['equipmentName', $equipmentName]
+            ])->first();
 
-        Equipment::updateOrCreate(
-            ['reportId' => $report->reportId,],
-            [
-                'equipmentId' => $equipmentId,
-                'exca' => $request->exca,
-                'buldozer' => $request->buldozer,
-                'vibro' => $request->vibro,
-                'truck' => $request->truck,
-                'pickup' => $request->pickup,
-                'crane' => $request->crane,
-                'forklift' => $request->forklift,
-                'pancang' => $request->pancang,
-            ]
-        );
+    
+            if ($equipment) {
+                $equipment->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Equipment::create([
+                    'reportId' => $report->reportId,
+                    'equipmentName' => $equipmentName,
+                    'result' => $result,
+                ]);
+            }
+        }
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
 
     public function weatherSave(Request $request, Report $report) {
 
-        // dd($request);
+        $validatedData = $request->validate([
+            'data' => 'array',
+            'data.*' => 'integer|min:0',
+        ]);
 
-        // $request->validate([
-        //     'time1' => ['required'],
-        //     'time2' => ['required'],
-        //     'time3' => ['required'],
-        //     'time4' => ['required'],
-        //     'time5' => ['required'],
-        //     'time6' => ['required'],
-        //     'time7' => ['required'],
-        //     'time8' => ['required'],
-        //     'time9' => ['required'],
-        //     'time10' => ['required'],
-        //     'time11' => ['required'],
-        //     'time12' => ['required'],
-        // ]);
+        foreach ($validatedData['data'] as $time => $result) {
+            $weather = Weather::where([
+                ['reportId', $report->reportId],
+                ['time', $time]
+            ])->first();
 
-        $weatherId = IdGenerator::generate(['table' => 'weather', 'field' => 'weatherId', 'length' => 10, 'prefix' => 'WAT']);
-
-        Weather::updateOrCreate(
-            ['reportId' => $report->reportId,],
-            [
-                'weatherId' => $weatherId,
-                'time1' => $request->time1,
-                'time2' => $request->time2,
-                'time3' => $request->time3,
-                'time4' => $request->time4,
-                'time5' => $request->time5,
-                'time6' => $request->time6,
-                'time7' => $request->time7,
-                'time8' => $request->time8,
-                'time9' => $request->time9,
-                'time10' => $request->time10,
-                'time11' => $request->time11,
-                'time12' => $request->time12,
-            ]
-        );
+    
+            if ($weather) {
+                $weather->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Weather::create([
+                    'reportId' => $report->reportId,
+                    'time' => $time,
+                    'result' => $result,
+                ]);
+            }
+        }
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }
 
-    function chemicalSave(Request $request, Report $report) {
-        $request->validate([
-            'dust' => ['required'],
-            'fluid' => ['required'],
-            'gas' => ['required'],
+    public function chemicalSave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
         ]);
 
-        $chemicalId = IdGenerator::generate(['table' => 'chemicals', 'field' => 'chemicalId', 'length' => 10, 'prefix' => 'CMH']);
+        foreach ($validatedData['data'] as $chemicalName => $result) {
+            $chemical = Chemical::where([
+                ['reportId', $report->reportId],
+                ['chemicalName', $chemicalName]
+            ])->first();
 
-        Ppe::updateOrCreate(
-            ['reportId' => $report->reportId,],
-            [
-                'ppeId' => $ppeId,
-                'dust' => $request->dust,
-                'uniform' => $request->uniform,
-                'vest' => $request->vest,
-                'safetyShoes' => $request->safetyShoes,
-                'safetyGoggles' => $request->safetyGoggles,
-                'glove' => $request->glove,
-                'safetyMask' => $request->safetyMask,
-                'earPlug' => $request->earPlug,
-            ]
-        );
+    
+            if ($chemical) {
+                $chemical->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Chemical::create([
+                    'reportId' => $report->reportId,
+                    'chemicalName' => $chemicalName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function physicsSave(Request $request, Report $report) {
+        
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $physicName => $result) {
+            $physics = Physics::where([
+                ['reportId', $report->reportId],
+                ['physicName', $physicName]
+            ])->first();
+
+    
+            if ($physics) {
+                $physics->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Physics::create([
+                    'reportId' => $report->reportId,
+                    'physicName' => $physicName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function biologySave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $biologyName => $result) {
+            $biology = Biology::where([
+                ['reportId', $report->reportId],
+                ['biologyName', $biologyName]
+            ])->first();
+
+    
+            if ($biology) {
+                $biology->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Biology::create([
+                    'reportId' => $report->reportId,
+                    'biologyName' => $biologyName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+
+    public function psikologySave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $psikologyName => $result) {
+            $psikology = Psikology::where([
+                ['reportId', $report->reportId],
+                ['psikologyName', $psikologyName]
+            ])->first();
+
+    
+            if ($psikology) {
+                $psikology->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Psikology::create([
+                    'reportId' => $report->reportId,
+                    'psikologyName' => $psikologyName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function ergonomySave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $ergonomyName => $result) {
+            $ergonomy = Ergonomy::where([
+                ['reportId', $report->reportId],
+                ['ergonomyName', $ergonomyName]
+            ])->first();
+
+    
+            if ($ergonomy) {
+                $ergonomy->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Ergonomy::create([
+                    'reportId' => $report->reportId,
+                    'ergonomyName' => $ergonomyName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function behaviorSave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $behaviorName => $result) {
+            $behavior = Behavior::where([
+                ['reportId', $report->reportId],
+                ['behaviorName', $behaviorName]
+            ])->first();
+
+    
+            if ($behavior) {
+                $behavior->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Behavior::create([
+                    'reportId' => $report->reportId,
+                    'behaviorName' => $behaviorName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function conditionSave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $conditionName => $result) {
+            $condition = Condition::where([
+                ['reportId', $report->reportId],
+                ['conditionName', $conditionName]
+            ])->first();
+
+    
+            if ($condition) {
+                $condition->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Condition::create([
+                    'reportId' => $report->reportId,
+                    'conditionName' => $conditionName,
+                    'result' => $result,
+                ]);
+            }
+        }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function questionSave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'data' => 'required|array',
+            'data.*' => 'required|integer|min:0',
+        ]);
+
+        foreach ($validatedData['data'] as $questionName => $result) {
+            $question = Question::where([
+                ['reportId', $report->reportId],
+                ['questionName', $questionName]
+            ])->first();
+
+    
+            if ($question) {
+                $question->update([
+                    'result' => $result,
+                ]);
+            } else {
+                
+                Question::create([
+                    'reportId' => $report->reportId,
+                    'questionName' => $questionName,
+                    'result' => $result,
+                ]);
+            }
+        }
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }

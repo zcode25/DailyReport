@@ -12,7 +12,7 @@ class ProjectDetailController extends Controller
 {
     public function index(Project $project) {
 
-        $reports = Report::latest()->get();
+        $reports = Report::where('projectId', $project->projectId)->latest()->get();
 
         // dd($reports);
 
