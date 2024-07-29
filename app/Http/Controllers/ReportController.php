@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ppe;
+use App\Models\Note;
 use App\Models\Report;
 use App\Models\Biology;
 use App\Models\Physics;
 use App\Models\Weather;
+use App\Models\Activity;
 use App\Models\Behavior;
 use App\Models\Chemical;
 use App\Models\Ergonomy;
@@ -15,6 +17,7 @@ use App\Models\Question;
 use App\Models\Condition;
 use App\Models\Equipment;
 use App\Models\Psikology;
+use App\Models\ActivityPlan;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -143,6 +146,11 @@ class ReportController extends Controller
         $behaviorData = Behavior::where('reportId', $report->reportId)->get()->keyBy('behaviorName');
         $conditionData = Condition::where('reportId', $report->reportId)->get()->keyBy('conditionName');
         $questionData = question::where('reportId', $report->reportId)->get()->keyBy('questionName');
+        $noteData = Note::where('reportId', $report->reportId)->first();
+        $activitys = Activity::where('reportId', $report->reportId)->get();
+        $activityPlans = ActivityPlan::where('reportId', $report->reportId)->get();
+
+        // dd($noteData);
 
         return view('reports.index', [
             'report' => $report,
@@ -155,9 +163,9 @@ class ReportController extends Controller
             'weathers' => $weathers,
             'weatherData' => $weatherData,
             'chemicals' => $chemicals,
-            'chemicalData' => $chemicalData, 
+            'chemicalData' => $chemicalData,
             'physics' => $physics,
-            'physicData' => $physicData, 
+            'physicData' => $physicData,
             'biologys' => $biologys,
             'biologyData' => $biologyData,
             'psikologys' => $psikologys,
@@ -170,6 +178,9 @@ class ReportController extends Controller
             'conditionData' => $conditionData,
             'questions' => $questions,
             'questionData' => $questionData,
+            'noteData' => $noteData,
+            'activitys' => $activitys,
+            'activityPlans' => $activityPlans,
         ]);
     }
 
@@ -187,14 +198,14 @@ class ReportController extends Controller
                 ['position', $position]
             ])->first();
 
-    
+
             if ($manpower) {
                 $manpower->update([
                     'person' => $qty,
                 ]);
             } else {
                 // $manpowerId = IdGenerator::generate(['table' => 'manpowers', 'field' => 'manpowerId', 'length' => 10, 'prefix' => 'MPW']);
-                
+
                 Manpower::create([
                     'reportId' => $report->reportId,
                     'position' => $position,
@@ -219,13 +230,13 @@ class ReportController extends Controller
                 ['ppeName', $ppeName]
             ])->first();
 
-    
+
             if ($ppe) {
                 $ppe->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Ppe::create([
                     'reportId' => $report->reportId,
                     'ppeName' => $ppeName,
@@ -238,7 +249,7 @@ class ReportController extends Controller
     }
 
     public function equipmentSave(Request $request, Report $report) {
-        
+
         $validatedData = $request->validate([
             'data' => 'required|array',
             'data.*' => 'required|integer|min:0',
@@ -250,13 +261,13 @@ class ReportController extends Controller
                 ['equipmentName', $equipmentName]
             ])->first();
 
-    
+
             if ($equipment) {
                 $equipment->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Equipment::create([
                     'reportId' => $report->reportId,
                     'equipmentName' => $equipmentName,
@@ -281,13 +292,13 @@ class ReportController extends Controller
                 ['time', $time]
             ])->first();
 
-    
+
             if ($weather) {
                 $weather->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Weather::create([
                     'reportId' => $report->reportId,
                     'time' => $time,
@@ -312,13 +323,13 @@ class ReportController extends Controller
                 ['chemicalName', $chemicalName]
             ])->first();
 
-    
+
             if ($chemical) {
                 $chemical->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Chemical::create([
                     'reportId' => $report->reportId,
                     'chemicalName' => $chemicalName,
@@ -331,7 +342,7 @@ class ReportController extends Controller
     }
 
     public function physicsSave(Request $request, Report $report) {
-        
+
         $validatedData = $request->validate([
             'data' => 'required|array',
             'data.*' => 'required|integer|min:0',
@@ -343,13 +354,13 @@ class ReportController extends Controller
                 ['physicName', $physicName]
             ])->first();
 
-    
+
             if ($physics) {
                 $physics->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Physics::create([
                     'reportId' => $report->reportId,
                     'physicName' => $physicName,
@@ -374,13 +385,13 @@ class ReportController extends Controller
                 ['biologyName', $biologyName]
             ])->first();
 
-    
+
             if ($biology) {
                 $biology->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Biology::create([
                     'reportId' => $report->reportId,
                     'biologyName' => $biologyName,
@@ -406,13 +417,13 @@ class ReportController extends Controller
                 ['psikologyName', $psikologyName]
             ])->first();
 
-    
+
             if ($psikology) {
                 $psikology->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Psikology::create([
                     'reportId' => $report->reportId,
                     'psikologyName' => $psikologyName,
@@ -437,13 +448,13 @@ class ReportController extends Controller
                 ['ergonomyName', $ergonomyName]
             ])->first();
 
-    
+
             if ($ergonomy) {
                 $ergonomy->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Ergonomy::create([
                     'reportId' => $report->reportId,
                     'ergonomyName' => $ergonomyName,
@@ -468,13 +479,13 @@ class ReportController extends Controller
                 ['behaviorName', $behaviorName]
             ])->first();
 
-    
+
             if ($behavior) {
                 $behavior->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Behavior::create([
                     'reportId' => $report->reportId,
                     'behaviorName' => $behaviorName,
@@ -499,13 +510,13 @@ class ReportController extends Controller
                 ['conditionName', $conditionName]
             ])->first();
 
-    
+
             if ($condition) {
                 $condition->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Condition::create([
                     'reportId' => $report->reportId,
                     'conditionName' => $conditionName,
@@ -530,13 +541,13 @@ class ReportController extends Controller
                 ['questionName', $questionName]
             ])->first();
 
-    
+
             if ($question) {
                 $question->update([
                     'result' => $result,
                 ]);
             } else {
-                
+
                 Question::create([
                     'reportId' => $report->reportId,
                     'questionName' => $questionName,
@@ -544,6 +555,76 @@ class ReportController extends Controller
                 ]);
             }
         }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+
+    public function noteSave(Request $request, Report $report) {
+        $request->validate([
+            'note' => ['required', 'string', 'max:255'],
+        ]);
+
+        $note = Note::where([
+                ['reportId', $report->reportId],
+            ])->first();
+
+            if ($note) {
+                $note->update([
+                    'note' => $request->note,
+                ]);
+            } else {
+
+                note::create([
+                    'reportId' => $report->reportId,
+                    'note' => $request->note,
+                ]);
+            }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function activityAdd(Report $report) {
+        return view('reports.activity', [
+            'report' => $report
+        ]);
+    }
+
+    public function activitySave(Request $request, Report $report) {
+
+
+        $validatedData = $request->validate([
+            'activityTime' => 'required',
+            'activityName' => 'required',
+            'activityImage' => 'required',
+        ]);
+
+        if($request->file('activityImage')) {
+            $validatedData['activityImage'] = $request->file('activityImage')->store('activityImage');
+        }
+
+        $validatedData['reportId'] = $report->reportId;
+
+        Activity::create($validatedData);
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function activityPlanAdd(Report $report) {
+        return view('reports.activityPlan', [
+            'report' => $report
+        ]);
+    }
+
+    public function activityPlanSave(Request $request, Report $report) {
+
+        $validatedData = $request->validate([
+            'activityPlanName' => 'required',
+        ]);
+
+        $validatedData['reportId'] = $report->reportId;
+
+        ActivityPlan::create($validatedData);
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
     }

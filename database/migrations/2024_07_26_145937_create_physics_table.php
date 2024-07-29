@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('physics', function (Blueprint $table) {
             $table->id('physicId')->primary();
             $table->char('reportId', 20);
+            $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->string('physicName');
             $table->boolean('result');
             $table->timestamps();

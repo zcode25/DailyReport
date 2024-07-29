@@ -50,7 +50,7 @@
                 <div class="flex flex-row content-center text-gray-900 mb-5">
                     <p class="text-xl font-bold">PPE</p>
                 </div>
-                
+
                 @foreach ($ppes as $ppe)
                 <div class="text-gray-900">
                     <div class="form-control mb-1">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 @endforeach
-                    
+
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 @endforeach
-                
+
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
@@ -120,7 +120,7 @@
                     </div>
                 </div>
                 @endforeach
-                
+
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
@@ -143,7 +143,7 @@
                     </div>
                 </div>
                 @endforeach
-                
+
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
@@ -167,7 +167,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button> 
+                    <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -189,7 +189,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button> 
+                    <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -211,7 +211,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button> 
+                    <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -233,7 +233,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button> 
+                    <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -255,7 +255,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button> 
+                    <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -277,7 +277,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button> 
+                    <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -308,11 +308,87 @@
                     </div>
                 </div>
                 @endforeach
-                
+
                 <div class="div">
                     <button class="w-full btn btn-primary text-white">Save</button>
                 </div>
                 </form>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
+                <form method="post" action="{{ route('report.note.save', ['report' => $report->reportId]) }}">
+                @csrf
+                <div class="flex flex-row content-center text-gray-900 mb-5">
+                    <p class="text-xl font-bold">Note</p>
+                </div>
+                {{-- @foreach ($equipments as $equipment) --}}
+                <div class="text-gray-900 mb-3">
+                    <div class="mb-3">
+                        <p>Note</p>
+                    </div>
+                    <div>
+                        <input class="input input-bordered w-full bg-white @error('note') input-error @enderror" type="text" id="note" name="note" value="{{ old('note', $noteData->note ?? '') }}">
+                        @error('note')
+                            <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                {{-- @endforeach --}}
+
+                <div class="div">
+                    <button class="w-full btn btn-primary text-white">Save</button>
+                </div>
+                </form>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
+                <div class="flex flex-row content-center text-gray-900 mb-5">
+                    <div class="basis-1/2">
+                        <p class="text-xl font-bold">Activity List</p>
+                    </div>
+                    <div class="basis-1/2">
+                        <div class="text-end">
+                            <a href="{{ route('report.activity.add', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                        </div>
+                    </div>
+                </div>
+                @foreach ($activitys as $activity)
+                <div class="card card-compact bg-base-100 shadow-md mb-5">
+                    <figure>
+                      <img
+                        src="{{ asset('storage/' .  $activity->activityImage ) }}"
+                        alt="Image" />
+                    </figure>
+                    <div class="card-body">
+                      <p class="text-sm">{{ \Carbon\Carbon::parse($activity->activityTime)->format('Y-m-d H:i') }}</p>
+                      <p class="text-lg">{{ $activity->activityName }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
+
+                <div class="flex flex-row content-center text-gray-900 mb-5">
+                    <div class="basis-1/2">
+                        <p class="text-xl font-bold">Activity Planning</p>
+                    </div>
+                    <div class="basis-1/2">
+                        <div class="text-end">
+                            <a href="{{ route('report.activityPlan.add', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                        </div>
+                    </div>
+                </div>
+                @foreach ($activitys as $activity)
+                <div class="card card-compact bg-base-100 shadow-md mb-5">
+                    <figure>
+                      <img
+                        src="{{ asset('storage/' .  $activity->activityImage ) }}"
+                        alt="Image" />
+                    </figure>
+                    <div class="card-body">
+                      <p class="text-sm">{{ \Carbon\Carbon::parse($activity->activityTime)->format('Y-m-d H:i') }}</p>
+                      <p class="text-lg">{{ $activity->activityName }}</p>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </div>

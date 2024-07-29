@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ergonomies', function (Blueprint $table) {
             $table->id('ergonomyId')->primary();
             $table->char('reportId', 20);
+            $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->string('ergonomyName');
             $table->boolean('result');
             $table->timestamps();

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('weather', function (Blueprint $table) {
-            $table->id('weatherId')->primary();
+        Schema::create('activity_plans', function (Blueprint $table) {
+            $table->id('activityPlanId');
             $table->char('reportId', 20);
             $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
-            $table->string('time');
-            $table->boolean('result');
+            $table->text('activityPlanName');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('weather');
+        Schema::dropIfExists('activity_plans');
     }
 };

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('behaviors', function (Blueprint $table) {
             $table->id('behaviorId')->primary();
             $table->char('reportId', 20);
+            $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->string('behaviorName');
             $table->boolean('result');
             $table->timestamps();

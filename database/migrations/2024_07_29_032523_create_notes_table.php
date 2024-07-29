@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plannings', function (Blueprint $table) {
-            $table->id();
+        Schema::create('notes', function (Blueprint $table) {
+            $table->id('noteId')->primary();
+            $table->char('reportId', 20);
+            $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
+            $table->text('note');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plannings');
+        Schema::dropIfExists('notes');
     }
 };

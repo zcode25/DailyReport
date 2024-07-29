@@ -50,6 +50,11 @@ Route::controller(ReportController::class)->group(function() {
     Route::post('/project/projectDetail/report/behavior/save/{report:reportId}', 'behaviorSave')->name('report.behavior.save')->middleware('auth');
     Route::post('/project/projectDetail/report/condition/save/{report:reportId}', 'conditionSave')->name('report.condition.save')->middleware('auth');
     Route::post('/project/projectDetail/report/question/save/{report:reportId}', 'questionSave')->name('report.question.save')->middleware('auth');
+    Route::post('/project/projectDetail/report/note/save/{report:reportId}', 'noteSave')->name('report.note.save')->middleware('auth');
+    Route::get('/project/projectDetail/report/activity/add/{report:reportId}', 'activityAdd')->name('report.activity.add')->middleware('auth');
+    Route::post('/project/projectDetail/report/activity/save/{report:reportId}', 'activitySave')->name('report.activity.save')->middleware('auth');
+    Route::get('/project/projectDetail/report/activityPlan/add/{report:reportId}', 'activityPlanAdd')->name('report.activityPlan.add')->middleware('auth');
+    Route::post('/project/projectDetail/report/activityPlan/save/{report:reportId}', 'activityPlanSave')->name('report.activityPlan.save')->middleware('auth');
 });
 
 

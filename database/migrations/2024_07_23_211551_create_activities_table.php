@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activities', function (Blueprint $table) {
-            $table->id();
+            $table->id('activityId');
+            $table->char('reportId', 20);
+            $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
+            $table->text('activityTime');
+            $table->text('activityName');
+            $table->string('activityImage');
             $table->timestamps();
         });
     }
