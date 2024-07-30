@@ -19,11 +19,16 @@ use App\Models\Equipment;
 use App\Models\Psikology;
 use App\Models\ActivityPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ReportController extends Controller
 {
     public function index(Report $report) {
+
+        $title = 'Delete Data!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
 
         $manpowers = [
             ["type" => "Project Manager"],
@@ -627,5 +632,21 @@ class ReportController extends Controller
         ActivityPlan::create($validatedData);
 
         return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function activityDestroy(Activity $activity) {
+ 
+        $activityImage = Activity::where('activityId', $activity->activityId)->first();
+
+        try{
+            Storage::delete($activityImage->activityImage);
+            Activity::where('activityId', $activity->activityId)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+
+        return redirect(route('report.index', ['report' => $activityImage->reportId], absolute: false))->with('success', 'Data successfully deleted');
     }
 }

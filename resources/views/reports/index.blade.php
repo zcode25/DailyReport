@@ -340,7 +340,7 @@
                 </form>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
-                <div class="flex flex-row content-center text-gray-900 mb-5">
+                <div class="flex flex-row content-center text-gray-900">
                     <div class="basis-1/2">
                         <p class="text-xl font-bold">Activity List</p>
                     </div>
@@ -351,22 +351,21 @@
                     </div>
                 </div>
                 @foreach ($activitys as $activity)
-                <div class="card card-compact bg-base-100 shadow-md mb-5">
+                <div class="card card-compact bg-base-100 shadow-md mt-5">
                     <figure>
-                      <img
-                        src="{{ asset('storage/' .  $activity->activityImage ) }}"
-                        alt="Image" />
+                        <img src="{{ asset('storage/' .  $activity->activityImage ) }}"alt="Image" />
                     </figure>
                     <div class="card-body">
-                      <p class="text-sm">{{ \Carbon\Carbon::parse($activity->activityTime)->format('Y-m-d H:i') }}</p>
-                      <p class="text-lg">{{ $activity->activityName }}</p>
+                        <p class="text-sm">{{ \Carbon\Carbon::parse($activity->activityTime)->format('Y-m-d H:i') }}</p>
+                        <p class="text-lg mb-3">{{ $activity->activityName }}</p>
+                        <a href="{{ route('report.activity.destroy', ['activity' => $activity->activityId]) }}" class="btn btn-secondary btn-sm text-white" data-confirm-delete="true">Delete</a>
                     </div>
                 </div>
                 @endforeach
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
 
-                <div class="flex flex-row content-center text-gray-900 mb-5">
+                <div class="flex flex-row content-center text-gray-900">
                     <div class="basis-1/2">
                         <p class="text-xl font-bold">Activity Planning</p>
                     </div>
@@ -376,16 +375,15 @@
                         </div>
                     </div>
                 </div>
-                @foreach ($activitys as $activity)
-                <div class="card card-compact bg-base-100 shadow-md mb-5">
-                    <figure>
-                      <img
-                        src="{{ asset('storage/' .  $activity->activityImage ) }}"
-                        alt="Image" />
-                    </figure>
-                    <div class="card-body">
-                      <p class="text-sm">{{ \Carbon\Carbon::parse($activity->activityTime)->format('Y-m-d H:i') }}</p>
-                      <p class="text-lg">{{ $activity->activityName }}</p>
+                @foreach ($activityPlans as $activityPlan)
+                <div class="text-gray-900 mt-5">
+                    <div class="grid grid-cols-2 gap-2 text-gray-900">
+                        <div>
+                            <p>{{ $activityPlan->activityPlanName }}</p>
+                        </div>
+                        <div class="text-end">
+                            <a href="{{ route('report.index', ['report' => $report->reportId]) }}" class="btn btn-secondary btn-sm text-white">Delete</a>
+                        </div>
                     </div>
                 </div>
                 @endforeach
