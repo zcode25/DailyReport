@@ -56,7 +56,8 @@ Route::controller(ReportController::class)->group(function() {
     Route::get('/project/projectDetail/report/activityPlan/add/{report:reportId}', 'activityPlanAdd')->name('report.activityPlan.add')->middleware('auth');
     Route::post('/project/projectDetail/report/activityPlan/save/{report:reportId}', 'activityPlanSave')->name('report.activityPlan.save')->middleware('auth');
     Route::delete('/project/projectDetail/report/activity/destroy/{activity:activityId}', 'activityDestroy')->name('report.activity.destroy')->middleware('auth');
-    Route::delete('/project/projectDetail/report/activityPlan/destroy/{report:reportId}', 'activityPlanDestroy')->name('report.activityPlan.destroy')->middleware('auth');
+    Route::delete('/project/projectDetail/report/activityPlan/destroy/{activityPlan:activityPlanId}', 'activityPlanDestroy')->name('report.activityPlan.destroy')->middleware('auth');
+    Route::get('/project/projectDetail/report/export/{report:reportId}', 'export')->name('report.export')->middleware('auth');
 });
 
 

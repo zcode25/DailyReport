@@ -18,6 +18,7 @@
                     <p class="mb-3"> {{ $report->project->period }}</p>
                     <p class="font-bold">Description</p>
                     <p class="mb-3"> {{ $report->project->projectDesc }}</p>
+                    <a href="{{ route('report.export', ['report' => $report->reportId]) }}" class="btn btn-success">Export</a>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
@@ -382,7 +383,7 @@
                             <p>{{ $activityPlan->activityPlanName }}</p>
                         </div>
                         <div class="text-end">
-                            <a href="{{ route('report.index', ['report' => $report->reportId]) }}" class="btn btn-secondary btn-sm text-white">Delete</a>
+                            <a href="{{ route('report.activityPlan.destroy', ['activityPlan' => $activityPlan->activityPlanId]) }}" class="btn btn-secondary btn-sm text-white" data-confirm-delete="true">Delete</a>
                         </div>
                     </div>
                 </div>

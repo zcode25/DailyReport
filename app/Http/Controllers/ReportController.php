@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ppe;
 use App\Models\Note;
+use App\Models\User;
 use App\Models\Report;
 use App\Models\Biology;
 use App\Models\Physics;
@@ -14,6 +15,8 @@ use App\Models\Chemical;
 use App\Models\Ergonomy;
 use App\Models\Manpower;
 use App\Models\Question;
+// use Barryvdh\DomPDF\PDF as DomPDF;
+use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 use App\Models\Condition;
 use App\Models\Equipment;
 use App\Models\Psikology;
@@ -36,6 +39,7 @@ class ReportController extends Controller
             ["type" => "Supervisor"],
             ["type" => "Surveyor"],
             ["type" => "Safety"],
+            ["type" => "Civil"],
             ["type" => "Mechanical"],
             ["type" => "Operator"],
         ];
@@ -635,7 +639,7 @@ class ReportController extends Controller
     }
 
     public function activityDestroy(Activity $activity) {
- 
+
         $activityImage = Activity::where('activityId', $activity->activityId)->first();
 
         try{
@@ -648,5 +652,72 @@ class ReportController extends Controller
         }
 
         return redirect(route('report.index', ['report' => $activityImage->reportId], absolute: false))->with('success', 'Data successfully deleted');
+    }
+
+    public function activityPlanDestroy(ActivityPlan $activityPlan) {
+
+        try{
+            ActivityPlan::where('activityPlanId', $activityPlan->activityPlanId)->delete();
+        } catch (\Illuminate\Database\QueryException){
+            return back()->with([
+                'error' => 'Data cannot be deleted, because the data is still needed!',
+            ]);
+        }
+
+        return redirect(route('report.index', ['report' => $activityPlan->reportId], absolute: false))->with('success', 'Data successfully deleted');
+    }
+
+    public function export(Report $report) {
+
+        $manpowers = Manpower::where('reportId', $report->reportId)->get();
+        $ppes = Ppe::where('reportId', $report->reportId)->get();
+        $equipments = Equipment::where('reportId', $report->reportId)->get();
+        $weathers = weather::where('reportId', $report->reportId)->get();
+
+        $manpowersArray = [];
+        $ppesArray = [];
+        $equipmentsArray = [];
+        $weathersArray = [];
+
+
+        foreach ($manpowers as $manpower) {
+            $manpowersArray[$manpower->position] = [
+                'person' => $manpower->person,
+            ];
+        }
+
+        foreach ($ppes as $ppe) {
+            $ppesArray[$ppe->ppeName] = [
+                'result' => $ppe->result,
+            ];
+        }
+
+        foreach ($equipments as $equipment) {
+            $equipmentsArray[$equipment->equipmentName] = [
+                'result' => $equipment->result,
+            ];
+        }
+
+        foreach ($weathers as $weather) {
+            $weathersArray[$weather->time] = [
+                'result' => $weather->result,
+            ];
+        }
+
+        // dd($weathersArray);
+
+
+        $data = [
+            'report' => $report,
+            'manpowersArray' => $manpowersArray,
+            'ppesArray' => $ppesArray,
+            'equipmentsArray' => $equipmentsArray,
+            'weathersArray' => $weathersArray,
+        ];
+
+        $pdf = DomPDF::loadView('reports.export', $data);
+        $pdf->setPaper('a4', 'potrait');
+
+        return $pdf->stream('itsolutionstuff.pdf');
     }
 }
