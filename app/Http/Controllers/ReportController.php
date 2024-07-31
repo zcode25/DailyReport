@@ -672,12 +672,20 @@ class ReportController extends Controller
         $manpowers = Manpower::where('reportId', $report->reportId)->get();
         $ppes = Ppe::where('reportId', $report->reportId)->get();
         $equipments = Equipment::where('reportId', $report->reportId)->get();
-        $weathers = weather::where('reportId', $report->reportId)->get();
+        $weathers = Weather::where('reportId', $report->reportId)->get();
+        $activitys = Activity::where('reportId', $report->reportId)->get();
+        $activityPlans = ActivityPlan::where('reportId', $report->reportId)->get();
+        $chemicals = Chemical::where('reportId', $report->reportId)->get();
+        $physics = Physics::where('reportId', $report->reportId)->get();
+        $biologys = Biology::where('reportId', $report->reportId)->get();
 
         $manpowersArray = [];
         $ppesArray = [];
         $equipmentsArray = [];
         $weathersArray = [];
+        $chemicalsArray = [];
+        $physicsArray = [];
+        $biologysArray = [];
 
 
         foreach ($manpowers as $manpower) {
@@ -704,7 +712,26 @@ class ReportController extends Controller
             ];
         }
 
-        // dd($weathersArray);
+        foreach ($chemicals as $chemical) {
+            $chemicalsArray[$chemical->chemicalName] = [
+                'result' => $chemical->result,
+            ];
+        }
+
+        foreach ($physics as $physic) {
+            $physicsArray[$physic->physicName] = [
+                'result' => $physic->result,
+            ];
+        }
+
+        foreach ($biologys as $biology) {
+            $biologysArray[$biology->biologyName] = [
+                'result' => $biology->result,
+            ];
+        }
+
+
+        // dd($biologysArray);
 
 
         $data = [
@@ -713,6 +740,11 @@ class ReportController extends Controller
             'ppesArray' => $ppesArray,
             'equipmentsArray' => $equipmentsArray,
             'weathersArray' => $weathersArray,
+            'activitys' => $activitys,
+            'activityPlans' => $activityPlans,
+            'chemicalsArray' => $chemicalsArray,
+            'physicsArray' => $physicsArray,
+            'biologysArray' => $biologysArray,
         ];
 
         $pdf = DomPDF::loadView('reports.export', $data);

@@ -57,15 +57,15 @@
         </table>
         <table border="1">
             <tr>
-                <td width="50%">
-                    <p>Project Name : {{ $report->project->projectName }}</p>
-                    <p>Customer : {{ $report->project->customer }}</p>
-                    <p>Address : {{ $report->project->address }}</p>
+                <td width="50%" style="vertical-align: top;">
+                    <p style="margin: 0;">Project Name : {{ $report->project->projectName }}</p>
+                    <p style="margin: 0;">Customer : {{ $report->project->customer }}</p>
+                    <p style="margin: 0;">Address : {{ $report->project->address }}</p>
                 </td>
-                <td>
-                    <p>Date : {{ \Carbon\Carbon::parse($report->date)->format('d M Y') }}</p>
-                    <p>Day : {{ \Carbon\Carbon::parse($report->date)->format('D') }}</p>
-                    <p>Period : {{ $report->project->period }}</p>
+                <td style="vertical-align: top;">
+                    <p style="margin: 0;">Date : {{ \Carbon\Carbon::parse($report->date)->format('d M Y') }}</p>
+                    <p style="margin: 0;">Day : {{ \Carbon\Carbon::parse($report->date)->format('D') }}</p>
+                    <p style="margin: 0;">Period : {{ $report->project->period }}</p>
                 </td>
             </tr>
         </table>
@@ -115,12 +115,30 @@
                 <td>
                     @if ((string)($weathersArray['8:00 - 9:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
-                    @else
+                    @elseif ((string)($weathersArray['8:00 - 9:00']['result'] ?? '') == 1)
                         <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
+                <td>
+                    @if ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['17:00 - 18:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['17:00 - 18:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
                 <td></td>
             </tr>
             <tr>
@@ -152,9 +170,33 @@
                 </td>
                 <td>Truck</td>
                 <td>{{ $equipmentsArray['Truck']['result'] ?? '' }}</td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
+                <td>
+                    @if ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['14:00 - 15:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['14:00 - 15:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['19:00 - 20:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['19:00 - 20:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
                 <td></td>
             </tr>
             <tr>
@@ -186,9 +228,33 @@
                 </td>
                 <td>Crane</td>
                 <td>{{ $equipmentsArray['Crane']['result'] ?? '' }}</td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
+                <td>
+                    @if ((string)($weathersArray['10:00 - 11:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['10:00 - 11:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['15:00 - 16:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['15:00 - 16:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['20:00 - 21:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['20:00 - 21:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
                 <td></td>
             </tr>
             <tr>
@@ -220,9 +286,33 @@
                 </td>
                 <td>Pancang</td>
                 <td>{{ $equipmentsArray['Pancang']['result'] ?? '' }}</td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
-                <td>Bright Rain</td>
+                <td>
+                    @if ((string)($weathersArray['11:00 - 12:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['11:00 - 12:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['16:00 - 17:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['16:00 - 17:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
+                <td>
+                    @if ((string)($weathersArray['21:00 - 22:00']['result'] ?? '') == 0)
+                        <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
+                    @elseif ((string)($weathersArray['21:00 - 22:00']['result'] ?? '') == 1)
+                        <span class="icon-square"></span> Bright <span class="icon-check-square"></span> Rain
+                    @else
+                        <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
+                    @endif
+                </td>
                 <td></td>
             </tr>
         </table>
@@ -232,8 +322,16 @@
                 <td>ACTIVITY PLANNING LIST</td>
             </tr>
             <tr>
-                <td height="100px"></td>
-                <td></td>
+                <td style="vertical-align: top;">
+                    @foreach ($activitys as $activity)
+                        <p style="margin: 0;">- {{ $activity->activityName }}</p>                        
+                    @endforeach
+                </td>
+                <td style="vertical-align: top;">
+                    @foreach ($activityPlans as $activityPlan)
+                        <p style="margin: 0;">- {{ $activityPlan->activityPlanName }}</p>                        
+                    @endforeach
+                </td>
             </tr>
         </table>
         <table border="1">
@@ -250,27 +348,81 @@
                 <td>Condition</td>
             </tr>
             <tr>
-                <td>Debu</td>
-                <td>Iklim kerja</td>
-                <td>Mikroorganisme</td>
+                <td>
+                    @if ($chemicalsArray['Debu']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Debu
+                    @else
+                        <span class="icon-square"></span> Debu
+                    @endif
+                </td>
+                <td>
+                    @if ($physicsArray['Iklim Kerja']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Iklim Kerja
+                    @else
+                        <span class="icon-square"></span> Iklim Kerja
+                    @endif
+                </td>
+                <td>
+                    @if ($biologysArray['Mikroorganisme']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Mikroorganisme
+                    @else
+                        <span class="icon-square"></span> Mikroorganisme
+                    @endif
+                </td>
                 <td>Gangguan internal</td>
                 <td>Cara kerja </td>
                 <td>Unsafe condition</td>
                 <td>Safe</td>
             </tr>
             <tr>
-                <td>Cairan</td>
-                <td>Kebisingan</td>
-                <td>Arthopoda</td>
+                <td>
+                    @if ($chemicalsArray['Cairan']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Cairan
+                    @else
+                        <span class="icon-square"></span> Cairan
+                    @endif
+                </td>
+                <td>
+                    @if ($physicsArray['Kebisingan']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Kebisingan
+                    @else
+                        <span class="icon-square"></span> Kebisingan
+                    @endif
+                </td>
+                <td>
+                    @if ($biologysArray['Arthopoda']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Arthopoda
+                    @else
+                        <span class="icon-square"></span> Arthopoda
+                    @endif
+                </td>
                 <td>Gangguan External</td>
                 <td>Posisi kerja </td>
                 <td>Unsafe action</td>
                 <td>Minor injury</td>
             </tr>
             <tr>
-                <td>Gas</td>
-                <td>Getaran</td>
-                <td>Hewan Inventerbrata</td>
+                <td>
+                    @if ($chemicalsArray['Gas']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Gas
+                    @else
+                        <span class="icon-square"></span> Gas
+                    @endif
+                </td>
+                <td>
+                    @if ($physicsArray['Getaran']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Getaran
+                    @else
+                        <span class="icon-square"></span> Getaran
+                    @endif
+                </td>
+                <td>
+                    @if ($biologysArray['Hewan Invertebrata']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Hewan Invertebrata
+                    @else
+                        <span class="icon-square"></span> Hewan Invertebrata
+                    @endif
+                </td>
                 <td>Lingkungan kerja</td>
                 <td>Alat kerja</td>
                 <td>Safety violation</td>
@@ -278,8 +430,20 @@
             </tr>
             <tr>
                 <td></td>
-                <td>Gelombang</td>
-                <td>Alergi</td>
+                <td>
+                    @if ($physicsArray['Gelombang']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Gelombang
+                    @else
+                        <span class="icon-square"></span> Gelombang
+                    @endif
+                </td>
+                <td>
+                    @if ($biologysArray['Alergi']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Alergi
+                    @else
+                        <span class="icon-square"></span> Alergi
+                    @endif
+                </td>
                 <td></td>
                 <td>Beban angkat </td>
                 <td></td>
@@ -287,8 +451,20 @@
             </tr>
             <tr>
                 <td></td>
-                <td>Tekanan Udara</td>
-                <td>Binatang berbisa</td>
+                <td>
+                    @if ($physicsArray['Tekanan Udara']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Tekanan Udara
+                    @else
+                        <span class="icon-square"></span> Tekanan Udara
+                    @endif
+                </td>
+                <td>
+                    @if ($biologysArray['Binatang berbisa']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Binatang berbisa
+                    @else
+                        <span class="icon-square"></span> Binatang berbisa
+                    @endif
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -296,8 +472,20 @@
             </tr>
             <tr>
                 <td></td>
-                <td>Pencahayaan</td>
-                <td>Biantang Buas</td>
+                <td>
+                    @if ($physicsArray['Pencahayaan']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Pencahayaan
+                    @else
+                        <span class="icon-square"></span> Pencahayaan
+                    @endif
+                </td>
+                <td>
+                    @if ($biologysArray['Binatang berbisa']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Binatang berbisa
+                    @else
+                        <span class="icon-square"></span> Binatang berbisa
+                    @endif
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
