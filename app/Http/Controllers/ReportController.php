@@ -73,6 +73,7 @@ class ReportController extends Controller
             ["type" => "11:00 - 12:00"],
             ["type" => "13:00 - 14:00"],
             ["type" => "14:00 - 15:00"],
+            ["type" => "15:00 - 16:00"],
             ["type" => "16:00 - 17:00"],
             ["type" => "17:00 - 18:00"],
             ["type" => "19:00 - 20:00"],
@@ -678,6 +679,12 @@ class ReportController extends Controller
         $chemicals = Chemical::where('reportId', $report->reportId)->get();
         $physics = Physics::where('reportId', $report->reportId)->get();
         $biologys = Biology::where('reportId', $report->reportId)->get();
+        $psikologys = Psikology::where('reportId', $report->reportId)->get();
+        $ergonomys = Ergonomy::where('reportId', $report->reportId)->get();
+        $behaviors = Behavior::where('reportId', $report->reportId)->get();
+        $conditions = condition::where('reportId', $report->reportId)->get();
+        $questions = question::where('reportId', $report->reportId)->get();
+        $notes = note::where('reportId', $report->reportId)->first();
 
         $manpowersArray = [];
         $ppesArray = [];
@@ -686,6 +693,11 @@ class ReportController extends Controller
         $chemicalsArray = [];
         $physicsArray = [];
         $biologysArray = [];
+        $psikologysArray = [];
+        $ergonomysArray = [];
+        $behaviorsArray = [];
+        $conditionsArray = [];
+        $questionsArray = [];
 
 
         foreach ($manpowers as $manpower) {
@@ -730,8 +742,38 @@ class ReportController extends Controller
             ];
         }
 
+        foreach ($psikologys as $psikology) {
+            $psikologysArray[$psikology->psikologyName] = [
+                'result' => $psikology->result,
+            ];
+        }
 
-        // dd($biologysArray);
+        foreach ($ergonomys as $ergonomy) {
+            $ergonomysArray[$ergonomy->ergonomyName] = [
+                'result' => $ergonomy->result,
+            ];
+        }
+
+        foreach ($behaviors as $behavior) {
+            $behaviorsArray[$behavior->behaviorName] = [
+                'result' => $behavior->result,
+            ];
+        }
+
+        foreach ($conditions as $condition) {
+            $conditionsArray[$condition->conditionName] = [
+                'result' => $condition->result,
+            ];
+        }
+
+        foreach ($questions as $question) {
+            $questionsArray[$question->questionName] = [
+                'result' => $question->result,
+            ];
+        }
+
+
+        // dd($questionsArray);
 
 
         $data = [
@@ -745,6 +787,12 @@ class ReportController extends Controller
             'chemicalsArray' => $chemicalsArray,
             'physicsArray' => $physicsArray,
             'biologysArray' => $biologysArray,
+            'psikologysArray' => $psikologysArray,
+            'ergonomysArray' => $ergonomysArray,
+            'behaviorsArray' => $behaviorsArray,
+            'conditionsArray' => $conditionsArray,
+            'questionsArray' => $questionsArray,
+            'notes' => $notes,
         ];
 
         $pdf = DomPDF::loadView('reports.export', $data);

@@ -44,48 +44,74 @@
             font-size: 12px;
             color: #000;
         }
+
+        .page-break {
+            page-break-before: always;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <table border="1">
             <tr>
-                <th>Image</th>
-                <th>Daily Report</th>
-                <th>Image</th>
+                <th width="25%" style="padding: 5px"><img src="{{ public_path('image/logo.png')}}" alt="Logo" style="width: 50px"></th>
+                <th style="font-size: 16px">Daily Report</th>
+                <th width="25%"><img src="{{ public_path('image/k3.jpeg')}}" alt="K3" style="width: 50px"></th>
             </tr>
         </table>
         <table border="1">
             <tr>
                 <td width="50%" style="vertical-align: top;">
-                    <p style="margin: 0;">Project Name : {{ $report->project->projectName }}</p>
-                    <p style="margin: 0;">Customer : {{ $report->project->customer }}</p>
-                    <p style="margin: 0;">Address : {{ $report->project->address }}</p>
+                    <table border="0" style="vertical-align: top;">
+                        <tr>
+                            <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Project Name </p></td>
+                            <td>: {{ $report->project->projectName }}</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Customer </p></td>
+                            <td>: {{ $report->project->customer }}</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Address </p></td>
+                            <td>: {{ $report->project->address }}</td>
+                        </tr>
+                    </table>
                 </td>
                 <td style="vertical-align: top;">
-                    <p style="margin: 0;">Date : {{ \Carbon\Carbon::parse($report->date)->format('d M Y') }}</p>
-                    <p style="margin: 0;">Day : {{ \Carbon\Carbon::parse($report->date)->format('D') }}</p>
-                    <p style="margin: 0;">Period : {{ $report->project->period }}</p>
+                    <table border="0" style="vertical-align: top;">
+                        <tr>
+                            <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Date </p></td>
+                            <td>: {{ \Carbon\Carbon::parse($report->date)->format('d M Y') }}</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Day </p></td>
+                            <td>: {{ \Carbon\Carbon::parse($report->date)->format('D') }}</td>
+                        </tr>
+                        <tr>
+                            <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Period </p></td>
+                            <td>: {{ $report->project->period }}</td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
         <table border="1">
             <tr>
-                <td colspan="2">MANPOWER</td>
-                <td rowspan="2">PPE</td>
-                <td colspan="2">EQUIPMENT</td>
-                <td rowspan="2" colspan="3">WEATHER REPORT & TIME</td>
-                <td rowspan="2">REMARKS</td>
+                <td colspan="2" style="text-align: center">MANPOWER</td>
+                <td rowspan="2" style="text-align: center">PPE</td>
+                <td colspan="2" style="text-align: center">EQUIPMENT</td>
+                <td rowspan="2" colspan="3" style="text-align: center">WEATHER REPORT & TIME</td>
+                <td rowspan="2" style="text-align: center">REMARKS</td>
             </tr>
             <tr>
                 <td>Position</td>
-                <td>Person</td>
+                <td style="text-align: center">Person</td>
                 <td>Type</td>
-                <td>Qty</td>
+                <td style="text-align: center">Qty</td>
             </tr>
             <tr>
                 <td>Project Manager</td>
-                <td>{{ $manpowersArray['Project Manager']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Project Manager']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Helm']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Helm
@@ -94,15 +120,15 @@
                     @endif
                 </td>
                 <td>Exca</td>
-                <td>{{ $equipmentsArray['Exca']['result'] ?? '' }}</td>
-                <td>8:00 - 9:00</td>
-                <td>13:00 - 14:00</td>
-                <td>17:00 - 18:00</td>
+                <td style="text-align: center">{{ $equipmentsArray['Exca']['result'] ?? '' }}</td>
+                <td style="text-align: center">8:00 - 9:00</td>
+                <td style="text-align: center">13:00 - 14:00</td>
+                <td style="text-align: center">17:00 - 18:00</td>
                 <td></td>
             </tr>
             <tr>
                 <td>Site Manager</td>
-                <td>{{ $manpowersArray['Site Manager']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Site Manager']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Uniform']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Uniform
@@ -111,8 +137,8 @@
                     @endif
                 </td>
                 <td>Buldozer</td>
-                <td>{{ $equipmentsArray['Buldozer']['result'] ?? '' }}</td>
-                <td>
+                <td style="text-align: center">{{ $equipmentsArray['Buldozer']['result'] ?? '' }}</td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['8:00 - 9:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['8:00 - 9:00']['result'] ?? '') == 1)
@@ -121,7 +147,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 1)
@@ -130,7 +156,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['17:00 - 18:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['17:00 - 18:00']['result'] ?? '') == 1)
@@ -143,7 +169,7 @@
             </tr>
             <tr>
                 <td>Supervisor</td>
-                <td>{{ $manpowersArray['Supervisor']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Supervisor']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Vest']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Vest
@@ -152,15 +178,15 @@
                     @endif
                 </td>
                 <td>Vibro</td>
-                <td>{{ $equipmentsArray['Vibro']['result'] ?? '' }}</td>
-                <td>9:00 - 10:00</td>
-                <td>14:00 - 15:00</td>
-                <td>19:00 - 20:00</td>
+                <td style="text-align: center">{{ $equipmentsArray['Vibro']['result'] ?? '' }}</td>
+                <td style="text-align: center">9:00 - 10:00</td>
+                <td style="text-align: center">14:00 - 15:00</td>
+                <td style="text-align: center">19:00 - 20:00</td>
                 <td></td>
             </tr>
             <tr>
                 <td>Surveyor</td>
-                <td>{{ $manpowersArray['Surveyor']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Surveyor']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Safety Shoes']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Safety Shoes
@@ -169,8 +195,8 @@
                     @endif
                 </td>
                 <td>Truck</td>
-                <td>{{ $equipmentsArray['Truck']['result'] ?? '' }}</td>
-                <td>
+                <td style="text-align: center">{{ $equipmentsArray['Truck']['result'] ?? '' }}</td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['9:00 - 10:00']['result'] ?? '') == 1)
@@ -179,7 +205,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['14:00 - 15:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['14:00 - 15:00']['result'] ?? '') == 1)
@@ -188,7 +214,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['19:00 - 20:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['19:00 - 20:00']['result'] ?? '') == 1)
@@ -201,7 +227,7 @@
             </tr>
             <tr>
                 <td>Safety</td>
-                <td>{{ $manpowersArray['Safety']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Safety']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Safety Goggles']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Safety Goggles
@@ -210,15 +236,15 @@
                     @endif
                 </td>
                 <td>Pick up</td>
-                <td>{{ $equipmentsArray['Pick up']['result'] ?? '' }}</td>
-                <td>10:00 - 11:00</td>
-                <td>15:00 - 16:00</td>
-                <td>20:00 - 21:00</td>
+                <td style="text-align: center">{{ $equipmentsArray['Pick up']['result'] ?? '' }}</td>
+                <td style="text-align: center">10:00 - 11:00</td>
+                <td style="text-align: center">15:00 - 16:00</td>
+                <td style="text-align: center">20:00 - 21:00</td>
                 <td></td>
             </tr>
             <tr>
                 <td>Civil</td>
-                <td>{{ $manpowersArray['Civil']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Civil']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Glove']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Glove
@@ -227,8 +253,8 @@
                     @endif
                 </td>
                 <td>Crane</td>
-                <td>{{ $equipmentsArray['Crane']['result'] ?? '' }}</td>
-                <td>
+                <td style="text-align: center">{{ $equipmentsArray['Crane']['result'] ?? '' }}</td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['10:00 - 11:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['10:00 - 11:00']['result'] ?? '') == 1)
@@ -237,7 +263,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['15:00 - 16:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['15:00 - 16:00']['result'] ?? '') == 1)
@@ -246,7 +272,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['20:00 - 21:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['20:00 - 21:00']['result'] ?? '') == 1)
@@ -259,7 +285,7 @@
             </tr>
             <tr>
                 <td>Mechanical</td>
-                <td>{{ $manpowersArray['Mechanical']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Mechanical']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Safety Mask']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Safety Mask
@@ -268,15 +294,15 @@
                     @endif
                 </td>
                 <td>Forklift</td>
-                <td>{{ $equipmentsArray['Forklift']['result'] ?? '' }}</td>
-                <td>11:00 - 12:00</td>
-                <td>16:00 - 17:00</td>
-                <td>21:00 - 22:00</td>
+                <td style="text-align: center">{{ $equipmentsArray['Forklift']['result'] ?? '' }}</td>
+                <td style="text-align: center">11:00 - 12:00</td>
+                <td style="text-align: center">16:00 - 17:00</td>
+                <td style="text-align: center">21:00 - 22:00</td>
                 <td></td>
             </tr>
             <tr>
                 <td>Operator</td>
-                <td>{{ $manpowersArray['Operator']['person'] ?? '' }}</td>
+                <td style="text-align: center">{{ $manpowersArray['Operator']['person'] ?? '' }}</td>
                 <td>
                     @if ($ppesArray['Ear Plug']['result'] ?? '' == 1)
                         <span class="icon-check-square"></span> Ear Plug
@@ -285,8 +311,8 @@
                     @endif
                 </td>
                 <td>Pancang</td>
-                <td>{{ $equipmentsArray['Pancang']['result'] ?? '' }}</td>
-                <td>
+                <td style="text-align: center">{{ $equipmentsArray['Pancang']['result'] ?? '' }}</td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['11:00 - 12:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['11:00 - 12:00']['result'] ?? '') == 1)
@@ -295,7 +321,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['16:00 - 17:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['16:00 - 17:00']['result'] ?? '') == 1)
@@ -304,7 +330,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td>
+                <td style="text-align: center">
                     @if ((string)($weathersArray['21:00 - 22:00']['result'] ?? '') == 0)
                         <span class="icon-check-square"></span> Bright <span class="icon-square"></span> Rain
                     @elseif ((string)($weathersArray['21:00 - 22:00']['result'] ?? '') == 1)
@@ -318,34 +344,34 @@
         </table>
         <table border="1">
             <tr>
-                <td width="50%">ACTIVITY LIST</td>
-                <td>ACTIVITY PLANNING LIST</td>
+                <td width="50%" style="text-align: center">ACTIVITY LIST</td>
+                <td style="text-align: center">ACTIVITY PLANNING LIST</td>
             </tr>
             <tr>
                 <td style="vertical-align: top;">
                     @foreach ($activitys as $activity)
-                        <p style="margin: 0;">- {{ $activity->activityName }}</p>                        
+                        <p style="margin: 0;">- {{ $activity->activityName }}</p>
                     @endforeach
                 </td>
                 <td style="vertical-align: top;">
                     @foreach ($activityPlans as $activityPlan)
-                        <p style="margin: 0;">- {{ $activityPlan->activityPlanName }}</p>                        
+                        <p style="margin: 0;">- {{ $activityPlan->activityPlanName }}</p>
                     @endforeach
                 </td>
             </tr>
         </table>
         <table border="1">
             <tr>
-                <td colspan="7">POTENSION RISK</td>
+                <td colspan="7" style="text-align: center">POTENSION RISK</td>
             </tr>
             <tr>
-                <td>Kimia</td>
-                <td>Fisika</td>
-                <td>Biologi</td>
-                <td>Psikologi</td>
-                <td>Ergonomi</td>
-                <td>Behavior</td>
-                <td>Condition</td>
+                <td style="text-align: center">Kimia</td>
+                <td style="text-align: center">Fisika</td>
+                <td style="text-align: center">Biologi</td>
+                <td style="text-align: center">Psikologi</td>
+                <td style="text-align: center">Ergonomi</td>
+                <td style="text-align: center">Behavior</td>
+                <td style="text-align: center">Condition</td>
             </tr>
             <tr>
                 <td>
@@ -369,10 +395,34 @@
                         <span class="icon-square"></span> Mikroorganisme
                     @endif
                 </td>
-                <td>Gangguan internal</td>
-                <td>Cara kerja </td>
-                <td>Unsafe condition</td>
-                <td>Safe</td>
+                <td>
+                    @if ($psikologysArray['Gangguan internal']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Gangguan internal
+                    @else
+                        <span class="icon-square"></span> Gangguan internal
+                    @endif
+                </td>
+                <td>
+                    @if ($ergonomysArray['Cara kerja']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Cara kerja
+                    @else
+                        <span class="icon-square"></span> Cara kerja
+                    @endif
+                </td>
+                <td>
+                    @if ($behaviorsArray['Unsafe condition']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Unsafe condition
+                    @else
+                        <span class="icon-square"></span> Unsafe condition
+                    @endif
+                </td>
+                <td>
+                    @if ($conditionsArray['Safe']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Safe
+                    @else
+                        <span class="icon-square"></span> Safe
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td>
@@ -396,10 +446,34 @@
                         <span class="icon-square"></span> Arthopoda
                     @endif
                 </td>
-                <td>Gangguan External</td>
-                <td>Posisi kerja </td>
-                <td>Unsafe action</td>
-                <td>Minor injury</td>
+                <td>
+                    @if ($psikologysArray['Gangguan external']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Gangguan external
+                    @else
+                        <span class="icon-square"></span> Gangguan external
+                    @endif
+                </td>
+                <td>
+                    @if ($ergonomysArray['Posisi kerja']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Posisi kerja
+                    @else
+                        <span class="icon-square"></span> Posisi kerja
+                    @endif
+                </td>
+                <td>
+                    @if ($behaviorsArray['Unsafe action']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Unsafe action
+                    @else
+                        <span class="icon-square"></span> Unsafe action
+                    @endif
+                </td>
+                <td>
+                    @if ($conditionsArray['Minor injury']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Minor injury
+                    @else
+                        <span class="icon-square"></span> Minor injury
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td>
@@ -423,10 +497,34 @@
                         <span class="icon-square"></span> Hewan Invertebrata
                     @endif
                 </td>
-                <td>Lingkungan kerja</td>
-                <td>Alat kerja</td>
-                <td>Safety violation</td>
-                <td>Major injury</td>
+                <td>
+                    @if ($psikologysArray['Lingkungan kerja']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Lingkungan kerja
+                    @else
+                        <span class="icon-square"></span> Lingkungan kerja
+                    @endif
+                </td>
+                <td>
+                    @if ($ergonomysArray['Alat kerja']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Alat kerja
+                    @else
+                        <span class="icon-square"></span> Alat kerja
+                    @endif
+                </td>
+                <td>
+                    @if ($behaviorsArray['Safety violation']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Safety violation
+                    @else
+                        <span class="icon-square"></span> Safety violation
+                    @endif
+                </td>
+                <td>
+                    @if ($conditionsArray['Major injury']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Major injury
+                    @else
+                        <span class="icon-square"></span> Major injury
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -445,9 +543,21 @@
                     @endif
                 </td>
                 <td></td>
-                <td>Beban angkat </td>
+                <td>
+                    @if ($ergonomysArray['Beban angkat']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Beban angkat
+                    @else
+                        <span class="icon-square"></span> Beban angkat
+                    @endif
+                </td>
                 <td></td>
-                <td>Near miss</td>
+                <td>
+                    @if ($conditionsArray['Near miss']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Near miss
+                    @else
+                        <span class="icon-square"></span> Near miss
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -468,7 +578,13 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>Fatality</td>
+                <td>
+                    @if ($conditionsArray['Fatality']['result'] ?? '' == 1)
+                        <span class="icon-check-square"></span> Fatality
+                    @else
+                        <span class="icon-square"></span> Fatality
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td></td>
@@ -494,26 +610,147 @@
         </table>
         <table border="1">
             <tr>
-                <td width="70%">
-                    <p>Apakah pekerja telah menggunakan Alat pelindung diri (APD)</p>
-                    <p>Apakah pekerja memahami resiko bahaya dari pekerjaannya</p>
-                    <p>Apakah dilokasi kerja tersedia Alat pemadam api ringan (APAR)</p>
-                    <p>Apakah tanda peringatan dan batas area kerja sudah terpasang</p>
-                    <p>Apakah peralatan tangga dan perancah dalam kondisi aman</p>
-                    <p>Apakah pekerja sudah menggunakan dan memproteksi terjatuh</p>
-                    <p>Apakah Peralatan kerja sudah dirapihkan </p>
-                    <p>Apakah lingkungan kerja sudah dibersihkan </p>
+                <td width="60%" style="vertical-align: top;">
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah pekerja telah menggunakan Alat pelindung diri (APD)</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah pekerja telah menggunakan Alat pelindung diri (APD)']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah pekerja telah menggunakan Alat pelindung diri (APD)']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah pekerja memahami resiko bahaya dari pekerjaannya</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah pekerja memahami resiko bahaya dari pekerjaannya']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah pekerja memahami resiko bahaya dari pekerjaannya']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah dilokasi kerja tersedia Alat pemadam api ringan (APAR)</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah dilokasi kerja tersedia Alat pemadam api ringan (APAR)']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah dilokasi kerja tersedia Alat pemadam api ringan (APAR)']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah tanda peringatan dan batas area kerja sudah terpasang</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah tanda peringatan dan batas area kerja sudah terpasang']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah tanda peringatan dan batas area kerja sudah terpasang']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah peralatan tangga dan perancah dalam kondisi aman</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah peralatan tangga dan perancah dalam kondisi aman']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah peralatan tangga dan perancah dalam kondisi aman']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah pekerja sudah menggunakan dan memproteksi terjatuh</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah pekerja sudah menggunakan dan memproteksi terjatuh']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah pekerja sudah menggunakan dan memproteksi terjatuh']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah Peralatan kerja sudah dirapihkan</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah Peralatan kerja sudah dirapihkan']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah Peralatan kerja sudah dirapihkan']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <table border="0">
+                            <tr>
+                                <td width="80%"><span style="margin: 0;">Apakah lingkungan kerja sudah dibersihkan</span></td>
+                                <td>
+                                    @if ((string)($questionsArray['Apakah lingkungan kerja sudah dibersihkan']['result'] ?? '') == 0)
+                                        <span class="icon-check-square"></span> Yes <span class="icon-square"></span> No
+                                    @elseif ((string)($questionsArray['Apakah lingkungan kerja sudah dibersihkan']['result'] ?? '') == 1)
+                                        <span class="icon-square"></span> Yes <span class="icon-check-square"></span> No
+                                    @else
+                                        <span class="icon-square"></span> Yes <span class="icon-square"></span> No
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </td>
-                <td>
+                <td style="vertical-align: top;">
                     Note :
+                    <p style="margin: 0">{{ $notes->note }}</p>
                 </td>
             </tr>
         </table>
-        <table border="1">
+        <table border="0" style="margin-top: 50px;">
             <tr>
-                <td>Approved by</td>
-                <td>Checked by</td>
-                <td>Prepared by</td>
+                <td style="text-align: center">Approved by</td>
+                <td style="text-align: center">Checked by</td>
+                <td style="text-align: center">Prepared by</td>
             </tr>
             <tr>
                 <td height=70px></td>
@@ -521,11 +758,15 @@
                 <td></td>
             </tr>
             <tr>
-                <td>(__________________)</td>
-                <td>(__________________)</td>
-                <td>(__________________)</td>
+                <td style="text-align: center">(__________________)</td>
+                <td style="text-align: center">(__________________)</td>
+                <td style="text-align: center">(__________________)</td>
             </tr>
         </table>
+    </div>
+    <div class="page-break"></div>
+    <div class="container">
+        <h1>Hello</h1>
     </div>
 </body>
 </html>

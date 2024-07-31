@@ -18,7 +18,7 @@
                     <p class="mb-3"> {{ $report->project->period }}</p>
                     <p class="font-bold">Description</p>
                     <p class="mb-3"> {{ $report->project->projectDesc }}</p>
-                    <a href="{{ route('report.export', ['report' => $report->reportId]) }}" class="btn btn-success">Export</a>
+                    <a target="_blank" href="{{ route('report.export', ['report' => $report->reportId]) }}" class="btn btn-success">Export</a>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
