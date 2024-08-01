@@ -33,7 +33,10 @@ Route::controller(ProjectController::class)->group(function() {
 Route::controller(ProjectDetailController::class)->group(function() {
     Route::get('/project/projectDetail/{project:projectId}', 'index')->name('projectDetail.index')->middleware('auth');
     Route::get('/project/projectDetail/add/{project:projectId}', 'add')->name('projectDetail.add')->middleware('auth');
+    Route::get('/project/projectDetail/reporter/add/{project:projectId}', 'ReporterAdd')->name('projectDetail.reporter.add')->middleware('auth');
     Route::post('/project/projectDetail/save/{project:projectId}', 'save')->name('projectDetail.save')->middleware('auth');
+    Route::post('/project/projectDetail/reporter/save/{project:projectId}', 'reporterSave')->name('projectDetail.reporter.save')->middleware('auth');
+    Route::delete('/project/projectDetail/reporter/destroy/{reporter:reporterId}', 'reporterDestroy')->name('projectDetail.reporter.destroy')->middleware('auth');
 });
 
 Route::controller(ReportController::class)->group(function() {

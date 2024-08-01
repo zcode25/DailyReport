@@ -27,6 +27,12 @@
                             <p class="mb-3"> {{ $user->section }}</p>
                             <p class="font-bold">Position</p>
                             <p class="mb-3"> {{ $user->position }}</p>
+                            <p class="font-bold">Level</p>
+                            @if ($user->level == 0)
+                                <p class="mb-3">Admin</p>
+                            @else
+                                <p class="mb-3">User</p>
+                            @endif
                             <div class="card-actions justify-end mt-5">
                                 <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-primary text-white btn-sm">Update</a>
                                 <a href="{{ route('user.destroy', ['user' => $user->id]) }}" class="btn btn-secondary btn-sm text-white" data-confirm-delete="true">Delete</a>

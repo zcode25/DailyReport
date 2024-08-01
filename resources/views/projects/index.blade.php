@@ -8,7 +8,9 @@
             </div>
             <div class="basis-1/2">
                 <div class="text-end">
-                    <a href="{{ route('project.add') }}" class="btn btn-primary btn-sm text-white">Add</a>
+                    @if (Auth::user()->level == 0)
+                        <a href="{{ route('project.add') }}" class="btn btn-primary btn-sm text-white">Add</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -30,7 +32,10 @@
                             <p class="font-bold">Description</p>
                             <p class="mb-3"> {{ $project->projectDesc }}</p>
                             <div class="card-actions justify-end mt-5">
-                                <a href="{{ route('project.edit', ['project' => $project->projectId]) }}" class="btn btn-primary text-white btn-sm">Update</a>
+                                @if (Auth::user()->level == 0)
+                                    <a href="{{ route('project.edit', ['project' => $project->projectId]) }}" class="btn btn-info text-white btn-sm">Update</a>
+                                @endif
+
                                 <a href="{{ route('projectDetail.index', ['project' => $project->projectId]) }}" class="btn btn-success text-white btn-sm">Detail</a>
                             </div>
                         </div>

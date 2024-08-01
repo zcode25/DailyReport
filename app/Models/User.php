@@ -4,9 +4,10 @@ namespace App\Models;
 use App\Models\Report;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Reporter;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'section',
         'position',
         'password',
+        'level',
     ];
 
     /**
@@ -50,5 +52,10 @@ class User extends Authenticatable
 
     public function report(){
         return $this->hasMany(report::class, 'reportId', 'reportId');
+    }
+
+    public function reportedProjects()
+    {
+        return $this->hasManyThrough(Project::class, Reporter::class, 'userId', 'projectId', 'id', 'projectId');
     }
 }

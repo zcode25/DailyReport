@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('biologies', function (Blueprint $table) {
             $table->id('biologyId')->primary();
-            $table->char('reportId', 20);
+            $table->unsignedBigInteger('reportId');
             $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->string('biologyName');
             $table->boolean('result');

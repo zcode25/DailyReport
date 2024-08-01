@@ -4,23 +4,30 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                <div class="flex items-center space-x-4">
+                    <a href="{{ route('project.index') }}" class="flex items-center space-x-2">
+                        <div class="avatar">
+                            <div class="w-10 h-10">
+                                <img src="/image/logo.png" alt="logo">
+                            </div>
+                        </div>
+                        <p class="text-gray-700 text-md font-bold">PT Sugih Anggra Wijaya</p>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('project.index')" :active="request()->routeIs('project*', 'report*')">
                         {{ __('Project') }}
                     </x-nav-link>
+                    @if (Auth::user()->level == 0)
                     <x-nav-link :href="route('user.index')" :active="request()->routeIs('user*')">
                         {{ __('User') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -73,15 +80,18 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            {{-- <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project', 'report*')">
+            </x-responsive-nav-link> --}}
+            <x-responsive-nav-link :href="route('project.index')" :active="request()->routeIs('project*', 'report*')">
                 {{ __('Project') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->level == 0)
             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user*')">
                 {{ __('User') }}
             </x-responsive-nav-link>
+            @endif
+
         </div>
 
         <!-- Responsive Settings Options -->

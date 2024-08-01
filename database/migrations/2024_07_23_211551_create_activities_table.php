@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id('activityId');
-            $table->char('reportId', 20);
+            $table->unsignedBigInteger('reportId');
             $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->text('activityTime');
             $table->text('activityName');

@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Project;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class Reporter extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'reportId';
+    protected $primaryKey = 'reporterId';
     public $incrementing = true;
     protected $keyType = 'string';
 

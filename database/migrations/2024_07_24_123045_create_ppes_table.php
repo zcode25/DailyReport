@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ppes', function (Blueprint $table) {
             $table->id('ppeId')->primary();
-            $table->char('reportId', 20);
+            $table->unsignedBigInteger('reportId');
             $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->string('ppeName');
             $table->boolean('result');

@@ -81,11 +81,11 @@
                     <table border="0">
                         <tr>
                             <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Date </p></td>
-                            <td>: {{ \Carbon\Carbon::parse($report->date)->format('d M Y') }}</td>
+                            <td>: {{ \Carbon\Carbon::parse($report->date)->format('d F Y') }}</td>
                         </tr>
                         <tr>
                             <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Day </p></td>
-                            <td>: {{ \Carbon\Carbon::parse($report->date)->format('D') }}</td>
+                            <td>: {{ \Carbon\Carbon::parse($report->date)->format('l') }}</td>
                         </tr>
                         <tr>
                             <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Period </p></td>
@@ -221,7 +221,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                
+
             </tr>
             <tr>
                 <td>Safety</td>
@@ -238,7 +238,7 @@
                 <td style="text-align: center">10:00 - 11:00</td>
                 <td style="text-align: center">15:00 - 16:00</td>
                 <td style="text-align: center">20:00 - 21:00</td>
-                
+
             </tr>
             <tr>
                 <td>Civil</td>
@@ -279,7 +279,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                
+
             </tr>
             <tr>
                 <td>Mechanical</td>
@@ -296,7 +296,7 @@
                 <td style="text-align: center">11:00 - 12:00</td>
                 <td style="text-align: center">16:00 - 17:00</td>
                 <td style="text-align: center">21:00 - 22:00</td>
-                
+
             </tr>
             <tr>
                 <td>Operator</td>
@@ -337,7 +337,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                
+
             </tr>
         </table>
         <table border="1">
@@ -764,7 +764,29 @@
     </div>
     <div class="page-break"></div>
     <div class="container">
-        <h1>Hello</h1>
+        @foreach ($activitys as $activity)
+
+        <table border="1">
+            <tr>
+                <td style="font-size: 14px; text-align: center;" colspan="2">Construction photo</td>
+            </tr>
+            <tr>
+                <td width="15%">Date</td>
+                <td>{{ \Carbon\Carbon::parse($report->date)->format('l, d F Y') }}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{ $report->project->address }}</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>{{ $activity->activityName }}</td>
+            </tr>
+            <tr style="text-align: center;">
+                <td colspan="2"><img src="{{ asset('storage/' .  $activity->activityImage ) }}" alt="image" width="85%"></td>
+            </tr>
+        </table>
+        @endforeach
     </div>
 </body>
 </html>

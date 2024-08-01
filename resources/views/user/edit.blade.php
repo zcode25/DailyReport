@@ -49,6 +49,26 @@
                         @enderror
                     </div>
 
+                    <div class="grid grid-cols-3 gap-4 text-gray-700 mb-4">
+                        <div class="label">Level</div>
+                        <div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer">
+                                    <span class="label-text text-gray-700">Admin</span>
+                                    <input type="radio" class="radio radio-primary" id="level-0" name="level" value="0" {{ old('level', $user->level) == '0' ? 'checked' : '' }}>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer">
+                                    <span class="label-text text-gray-700 text-center">User</span>
+                                    <input type="radio" class="radio radio-primary" id="level-1" name="level" value="1" {{ old('level', $user->level) == '1' ? 'checked' : '' }}>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex flex-row content-center">
                         <div class="basis-1/2">
                             <a href="{{ route('user.index') }}" class="btn btn-ghost">Back</a>

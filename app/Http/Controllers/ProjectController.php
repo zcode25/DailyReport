@@ -10,8 +10,16 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class ProjectController extends Controller
 {
     public function index() {
+
+        if (Auth::user()->level == 0) {
+            $projects = Project::latest()->get();
+        } else {
+            $projects = Auth::user()->reportedProjects()->latest()->get();
+        }
+
+
         return view('projects.index', [
-            'projects' => Project::latest()->get(),
+            'projects' => $projects,
         ]);
     }
 
@@ -28,12 +36,11 @@ class ProjectController extends Controller
             'projectDesc' => ['required', 'string', 'max:255'],
         ]);
 
-        $projectId = IdGenerator::generate(['table' => 'projects', 'field' => 'projectId', 'length' => 10, 'prefix' => 'PRJ']);
+        // $projectId = IdGenerator::generate(['table' => 'projects', 'field' => 'projectId', 'length' => 10, 'prefix' => 'PRJ']);
         $userId = Auth::user()->id;
 
 
         Project::create([
-            'projectId'         => $projectId,
             'projectName'       => $request->projectName,
             'customer'          => $request->customer,
             'address'           => $request->address,

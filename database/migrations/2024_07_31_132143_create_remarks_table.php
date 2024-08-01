@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('remarks', function (Blueprint $table) {
             $table->id('remarkId')->primary();
-            $table->char('reportId', 20);
+            $table->unsignedBigInteger('reportId');
             $table->foreign('reportId')->references('reportId')->on('reports')->onUpdate('cascade')->onDelete('restrict');
             $table->text('remark');
             $table->timestamps();

@@ -21,6 +21,7 @@ class UserController extends Controller
     }
 
     public function add () {
+
         return view('user.add');
     }
 
@@ -31,6 +32,7 @@ class UserController extends Controller
             'section' => ['required', 'string', 'max:100'],
             'position' => ['required', 'string', 'max:100'],
             'password' => ['required', 'min:8'],
+            'level' => 'required|in:0,1',
         ]);
 
         User::create([
@@ -39,6 +41,7 @@ class UserController extends Controller
             'section' => $request->section,
             'position' => $request->position,
             'password' => Hash::make($request->password),
+            'level' => $request->level
         ]);
 
         return redirect(route('user.index', absolute: false))->with('success', 'Data successfully added');
@@ -56,6 +59,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'section' => ['required', 'string', 'max:100'],
             'position' => ['required', 'string', 'max:100'],
+            'level' => 'required|in:0,1',
         ]);
 
 
@@ -64,6 +68,7 @@ class UserController extends Controller
             'email' => $request->email,
             'section' => $request->section,
             'position' => $request->position,
+            'level' => $request->level
         ]);
 
         return redirect(route('user.index', absolute: false))->with('success', 'Data successfully updated');
