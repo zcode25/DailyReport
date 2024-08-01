@@ -78,7 +78,7 @@
                     </table>
                 </td>
                 <td style="vertical-align: top;">
-                    <table border="0" style="vertical-align: top;">
+                    <table border="0">
                         <tr>
                             <td width="25%" style="vertical-align: top;"><p style="margin: 0;">Date </p></td>
                             <td>: {{ \Carbon\Carbon::parse($report->date)->format('d M Y') }}</td>
@@ -98,16 +98,16 @@
         <table border="1">
             <tr>
                 <td colspan="2" style="text-align: center">MANPOWER</td>
-                <td rowspan="2" style="text-align: center">PPE</td>
+                <td rowspan="2" style="text-align: center" width="13%">PPE</td>
                 <td colspan="2" style="text-align: center">EQUIPMENT</td>
                 <td rowspan="2" colspan="3" style="text-align: center">WEATHER REPORT & TIME</td>
                 <td rowspan="2" style="text-align: center">REMARKS</td>
             </tr>
             <tr>
-                <td>Position</td>
-                <td style="text-align: center">Person</td>
-                <td>Type</td>
-                <td style="text-align: center">Qty</td>
+                <td width="12%">Position</td>
+                <td style="text-align: center" width="6%">Person</td>
+                <td width="8%">Type</td>
+                <td style="text-align: center" width="6%">Qty</td>
             </tr>
             <tr>
                 <td>Project Manager</td>
@@ -121,10 +121,10 @@
                 </td>
                 <td>Exca</td>
                 <td style="text-align: center">{{ $equipmentsArray['Exca']['result'] ?? '' }}</td>
-                <td style="text-align: center">8:00 - 9:00</td>
+                <td style="text-align: center" width="13%">8:00 - 9:00</td>
                 <td style="text-align: center">13:00 - 14:00</td>
                 <td style="text-align: center">17:00 - 18:00</td>
-                <td></td>
+                <td rowspan="8" style="vertical-align: top;">{{ $remarks->remark ?? '' }}</td>
             </tr>
             <tr>
                 <td>Site Manager</td>
@@ -165,7 +165,6 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td></td>
             </tr>
             <tr>
                 <td>Supervisor</td>
@@ -182,7 +181,6 @@
                 <td style="text-align: center">9:00 - 10:00</td>
                 <td style="text-align: center">14:00 - 15:00</td>
                 <td style="text-align: center">19:00 - 20:00</td>
-                <td></td>
             </tr>
             <tr>
                 <td>Surveyor</td>
@@ -223,7 +221,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td></td>
+                
             </tr>
             <tr>
                 <td>Safety</td>
@@ -240,7 +238,7 @@
                 <td style="text-align: center">10:00 - 11:00</td>
                 <td style="text-align: center">15:00 - 16:00</td>
                 <td style="text-align: center">20:00 - 21:00</td>
-                <td></td>
+                
             </tr>
             <tr>
                 <td>Civil</td>
@@ -281,7 +279,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td></td>
+                
             </tr>
             <tr>
                 <td>Mechanical</td>
@@ -298,7 +296,7 @@
                 <td style="text-align: center">11:00 - 12:00</td>
                 <td style="text-align: center">16:00 - 17:00</td>
                 <td style="text-align: center">21:00 - 22:00</td>
-                <td></td>
+                
             </tr>
             <tr>
                 <td>Operator</td>
@@ -339,7 +337,7 @@
                         <span class="icon-square"></span> Bright <span class="icon-square"></span> Rain
                     @endif
                 </td>
-                <td></td>
+                
             </tr>
         </table>
         <table border="1">
@@ -742,7 +740,7 @@
                 </td>
                 <td style="vertical-align: top;">
                     Note :
-                    <p style="margin: 0">{{ $notes->note }}</p>
+                    <p style="margin: 0">{{ $notes->note ?? '' }}</p>
                 </td>
             </tr>
         </table>

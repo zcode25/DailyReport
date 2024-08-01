@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ppe;
 use App\Models\Note;
 use App\Models\User;
+use App\Models\Remark;
 use App\Models\Report;
 use App\Models\Biology;
 use App\Models\Physics;
@@ -14,15 +15,15 @@ use App\Models\Behavior;
 use App\Models\Chemical;
 use App\Models\Ergonomy;
 use App\Models\Manpower;
-use App\Models\Question;
 // use Barryvdh\DomPDF\PDF as DomPDF;
-use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
+use App\Models\Question;
 use App\Models\Condition;
 use App\Models\Equipment;
 use App\Models\Psikology;
 use App\Models\ActivityPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf as DomPDF;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class ReportController extends Controller
@@ -157,6 +158,7 @@ class ReportController extends Controller
         $conditionData = Condition::where('reportId', $report->reportId)->get()->keyBy('conditionName');
         $questionData = question::where('reportId', $report->reportId)->get()->keyBy('questionName');
         $noteData = Note::where('reportId', $report->reportId)->first();
+        $remarkData = Remark::where('reportId', $report->reportId)->first();
         $activitys = Activity::where('reportId', $report->reportId)->get();
         $activityPlans = ActivityPlan::where('reportId', $report->reportId)->get();
 
@@ -189,6 +191,7 @@ class ReportController extends Controller
             'questions' => $questions,
             'questionData' => $questionData,
             'noteData' => $noteData,
+            'remarkData' => $remarkData,
             'activitys' => $activitys,
             'activityPlans' => $activityPlans,
         ]);
@@ -572,7 +575,7 @@ class ReportController extends Controller
 
     public function noteSave(Request $request, Report $report) {
         $request->validate([
-            'note' => ['required', 'string', 'max:255'],
+            'note' => ['required', 'string', 'max:500'],
         ]);
 
         $note = Note::where([
@@ -588,6 +591,30 @@ class ReportController extends Controller
                 note::create([
                     'reportId' => $report->reportId,
                     'note' => $request->note,
+                ]);
+            }
+
+        return redirect(route('report.index', ['report' => $report->reportId], absolute: false))->with('success', 'Data successfully updated');
+    }
+
+    public function remarkSave(Request $request, Report $report) {
+        $request->validate([
+            'remark' => ['required', 'string', 'max:255'],
+        ]);
+
+        $remark = Remark::where([
+                ['reportId', $report->reportId],
+            ])->first();
+
+            if ($remark) {
+                $remark->update([
+                    'remark' => $request->remark,
+                ]);
+            } else {
+
+                Remark::create([
+                    'reportId' => $report->reportId,
+                    'remark' => $request->remark,
                 ]);
             }
 
@@ -685,6 +712,7 @@ class ReportController extends Controller
         $conditions = condition::where('reportId', $report->reportId)->get();
         $questions = question::where('reportId', $report->reportId)->get();
         $notes = note::where('reportId', $report->reportId)->first();
+        $remarks = remark::where('reportId', $report->reportId)->first();
 
         $manpowersArray = [];
         $ppesArray = [];
@@ -793,6 +821,7 @@ class ReportController extends Controller
             'conditionsArray' => $conditionsArray,
             'questionsArray' => $questionsArray,
             'notes' => $notes,
+            'remarks' => $remarks,
         ];
 
         $pdf = DomPDF::loadView('reports.export', $data);

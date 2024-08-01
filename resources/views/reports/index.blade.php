@@ -128,6 +128,31 @@
                 </form>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
+                <form method="post" action="{{ route('report.remark.save', ['report' => $report->reportId]) }}">
+                @csrf
+                <div class="flex flex-row content-center text-gray-900 mb-5">
+                    <p class="text-xl font-bold">Remarks</p>
+                </div>
+                {{-- @foreach ($equipments as $equipment) --}}
+                <div class="text-gray-900 mb-3">
+                    <div class="mb-3">
+                        <p>Remarks</p>
+                    </div>
+                    <div>
+                        <input class="input input-bordered w-full bg-white @error('remark') input-error @enderror" type="text" id="remark" name="remark" value="{{ old('remark', $remarkData->remark ?? '') }}">
+                        @error('remark')
+                            <div class="text-rose-500 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                {{-- @endforeach --}}
+
+                <div class="div">
+                    <button class="w-full btn btn-primary text-white">Save</button>
+                </div>
+                </form>
+            </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
                 <form method="post" action="{{ route('report.chemical.save', ['report' => $report->reportId]) }}">
                 @csrf
                 <div class="flex flex-row content-center text-gray-900 mb-5">
