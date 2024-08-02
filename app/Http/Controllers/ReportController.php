@@ -827,6 +827,6 @@ class ReportController extends Controller
         $pdf = DomPDF::loadView('reports.export', $data);
         $pdf->setPaper('a4', 'potrait');
 
-        return $pdf->stream('itsolutionstuff.pdf');
+        return $pdf->stream('Report-'. $report->date .'.pdf');
     }
 }
