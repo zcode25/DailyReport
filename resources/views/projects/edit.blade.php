@@ -62,7 +62,7 @@
                             <a href="{{ route('project.index') }}" class="btn btn-ghost">Back</a>
                         </div>
                         <div class="basis-1/2 text-end">
-                            <button class="btn btn-primary text-white">Submit</button>
+                            <button class="btn btn-neutral text-white">Submit</button>
                         </div>
                       </div>
                 </form>

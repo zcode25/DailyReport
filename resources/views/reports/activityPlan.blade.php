@@ -3,7 +3,7 @@
         <div class="flex flex-row content-center">
             <div class="basis-1/2">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Project Daily Report') }}
+                    {{ __('Daily Reports') }}
                 </h2>
             </div>
         </div>
@@ -27,10 +27,10 @@
 
                     <div class="flex flex-row content-center">
                       <div class="basis-1/2">
-                          <a href="{{ route('project.index') }}" class="btn btn-ghost">Back</a>
+                          <a href="{{ route('report.index', ['report' => $report->reportId]) }}" class="btn btn-ghost">Back</a>
                       </div>
                       <div class="basis-1/2 text-end">
-                          <button class="btn btn-primary text-white">Submit</button>
+                          <button class="btn btn-neutral text-white">Submit</button>
                       </div>
                     </div>
                 </form>

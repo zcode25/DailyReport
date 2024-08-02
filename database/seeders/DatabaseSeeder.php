@@ -22,9 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'id'            => 1,
-            'name'              => 'Adam Zein',
-            'email'             => 'adamzein345@gmail.com',
+            'name'              => 'Admin',
+            'email'             => 'admin@gmail.com',
             'position'          => 'IT',
             'section'           => 'Admin',
             'level'             => 0,

@@ -51,7 +51,7 @@ class ProjectDetailController extends Controller
             'userId' => $userId,
         ]);
 
-        return redirect(route('projectDetail.index', ['project' => $project->projectId], absolute: false))->with('success', 'Data successfully updated');
+        return redirect(route('projectDetail.index', ['project' => $project->projectId], absolute: false))->with('success', 'Data successfully added');
 
     }
 
@@ -78,7 +78,7 @@ class ProjectDetailController extends Controller
             'userId' => $request->userId,
         ]);
 
-        return redirect(route('projectDetail.index', ['project' => $project->projectId], absolute: false))->with('success', 'Data successfully updated');
+        return redirect(route('projectDetail.index', ['project' => $project->projectId], absolute: false))->with('success', 'Data successfully added');
 
     }
 
@@ -92,7 +92,7 @@ class ProjectDetailController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Data successfully updated');
+        return back()->with('success', 'Data deleted successfully');
     }
 
 }

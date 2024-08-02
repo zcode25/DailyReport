@@ -8,7 +8,7 @@
             </div>
             <div class="basis-1/2">
                 <div class="text-end">
-                    <a href="{{ route('user.add') }}" class="btn btn-primary btn-sm text-white">Add</a>
+                    <a href="{{ route('user.add') }}" class="btn btn-neutral btn-sm text-white">Add</a>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                                 <p class="mb-3">User</p>
                             @endif
                             <div class="card-actions justify-end mt-5">
-                                <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-primary text-white btn-sm">Update</a>
+                                <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-neutral text-white btn-sm">Update</a>
                                 <a href="{{ route('user.destroy', ['user' => $user->id]) }}" class="btn btn-secondary btn-sm text-white" data-confirm-delete="true">Delete</a>
                             </div>
                         </div>

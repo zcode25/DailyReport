@@ -18,7 +18,7 @@
                     <p class="mb-3"> {{ $report->project->period }}</p>
                     <p class="font-bold">Description</p>
                     <p class="mb-3"> {{ $report->project->projectDesc }}</p>
-                    <a target="_blank" href="{{ route('report.export', ['report' => $report->reportId]) }}" class="btn btn-primary text-white">Export PDF</a>
+                    <a target="_blank" href="{{ route('report.export', ['report' => $report->reportId]) }}" class="btn btn-neutral text-white">Export PDF</a>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-3">
@@ -41,7 +41,7 @@
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -58,14 +58,14 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $ppe['type'] }}</span>
                             <input type="hidden" name="data[{{ $ppe['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $ppe['type'] }}" name="data[{{ $ppe['type'] }}]" value="1" {{ old('data.' . $ppe['type'], $ppeData[$ppe['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $ppe['type'] }}" name="data[{{ $ppe['type'] }}]" value="1" {{ old('data.' . $ppe['type'], $ppeData[$ppe['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -90,7 +90,7 @@
                 @endforeach
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -107,7 +107,7 @@
                         <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="label-text text-gray-700">Bright</span>
-                                <input type="radio" class="radio radio-primary" id="{{ $weather['type'] }}-0" name="data[{{ $weather['type'] }}]" value="0" @if ((string)($weatherData[$weather['type']]->result ?? '') === '0') checked @endif>
+                                <input type="radio" class="radio radio-neutral" id="{{ $weather['type'] }}-0" name="data[{{ $weather['type'] }}]" value="0" @if ((string)($weatherData[$weather['type']]->result ?? '') === '0') checked @endif>
                             </label>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                         <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="label-text text-gray-700 text-center">Rain</span>
-                                <input type="radio" class="radio radio-primary" id="{{ $weather['type'] }}-1" name="data[{{ $weather['type'] }}]" value="1" @if ((string)($weatherData[$weather['type']]->result ?? '') === '1' ) checked @endif>
+                                <input type="radio" class="radio radio-neutral" id="{{ $weather['type'] }}-1" name="data[{{ $weather['type'] }}]" value="1" @if ((string)($weatherData[$weather['type']]->result ?? '') === '1' ) checked @endif>
                             </label>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                 @endforeach
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -148,7 +148,7 @@
                 {{-- @endforeach --}}
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -164,14 +164,14 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $chemical['type'] }}</span>
                             <input type="hidden" name="data[{{ $chemical['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $chemical['type'] }}" name="data[{{ $chemical['type'] }}]" value="1" {{ old('data.' . $chemical['type'], $chemicalData[$chemical['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $chemical['type'] }}" name="data[{{ $chemical['type'] }}]" value="1" {{ old('data.' . $chemical['type'], $chemicalData[$chemical['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -187,13 +187,13 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $physic['type'] }}</span>
                             <input type="hidden" name="data[{{ $physic['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $physic['type'] }}" name="data[{{ $physic['type'] }}]" value="1" {{ old('data.' . $physic['type'], $physicData[$physic['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $physic['type'] }}" name="data[{{ $physic['type'] }}]" value="1" {{ old('data.' . $physic['type'], $physicData[$physic['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -209,13 +209,13 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $biology['type'] }}</span>
                             <input type="hidden" name="data[{{ $biology['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $biology['type'] }}" name="data[{{ $biology['type'] }}]" value="1" {{ old('data.' . $biology['type'], $biologyData[$biology['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $biology['type'] }}" name="data[{{ $biology['type'] }}]" value="1" {{ old('data.' . $biology['type'], $biologyData[$biology['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -231,13 +231,13 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $psikology['type'] }}</span>
                             <input type="hidden" name="data[{{ $psikology['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $psikology['type'] }}" name="data[{{ $psikology['type'] }}]" value="1" {{ old('data.' . $psikology['type'], $psikologyData[$psikology['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $psikology['type'] }}" name="data[{{ $psikology['type'] }}]" value="1" {{ old('data.' . $psikology['type'], $psikologyData[$psikology['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -253,13 +253,13 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $ergonomy['type'] }}</span>
                             <input type="hidden" name="data[{{ $ergonomy['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $ergonomy['type'] }}" name="data[{{ $ergonomy['type'] }}]" value="1" {{ old('data.' . $ergonomy['type'], $ergonomyData[$ergonomy['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $ergonomy['type'] }}" name="data[{{ $ergonomy['type'] }}]" value="1" {{ old('data.' . $ergonomy['type'], $ergonomyData[$ergonomy['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -275,13 +275,13 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $behavior['type'] }}</span>
                             <input type="hidden" name="data[{{ $behavior['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $behavior['type'] }}" name="data[{{ $behavior['type'] }}]" value="1" {{ old('data.' . $behavior['type'], $behaviorData[$behavior['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $behavior['type'] }}" name="data[{{ $behavior['type'] }}]" value="1" {{ old('data.' . $behavior['type'], $behaviorData[$behavior['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -297,13 +297,13 @@
                         <label class="label cursor-pointer">
                             <span class="label-text text-gray-700 text-lg">{{ $condition['type'] }}</span>
                             <input type="hidden" name="data[{{ $condition['type'] }}]" value="0">
-                            <input type="checkbox" class="checkbox checkbox-primary" id="{{ $condition['type'] }}" name="data[{{ $condition['type'] }}]" value="1" {{ old('data.' . $condition['type'], $conditionData[$condition['type']]->result ?? '') == '1' ? 'checked' : '' }}>
+                            <input type="checkbox" class="checkbox checkbox-neutral" id="{{ $condition['type'] }}" name="data[{{ $condition['type'] }}]" value="1" {{ old('data.' . $condition['type'], $conditionData[$condition['type']]->result ?? '') == '1' ? 'checked' : '' }}>
                         </label>
                     </div>
                 </div>
                 @endforeach
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -320,7 +320,7 @@
                         <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="label-text text-gray-700">Yes</span>
-                                <input type="radio" class="radio radio-primary" id="{{ $question['type'] }}-0" name="data[{{ $question['type'] }}]" value="0" @if ((string)($questionData[$question['type']]->result ?? '') === '0') checked @endif>
+                                <input type="radio" class="radio radio-neutral" id="{{ $question['type'] }}-0" name="data[{{ $question['type'] }}]" value="0" @if ((string)($questionData[$question['type']]->result ?? '') === '0') checked @endif>
                             </label>
                         </div>
                     </div>
@@ -328,7 +328,7 @@
                         <div class="form-control">
                             <label class="label cursor-pointer">
                                 <span class="label-text text-gray-700 text-center">No</span>
-                                <input type="radio" class="radio radio-primary" id="{{ $question['type'] }}-1" name="data[{{ $question['type'] }}]" value="1" @if ((string)($questionData[$question['type']]->result ?? '') === '1' ) checked @endif>
+                                <input type="radio" class="radio radio-neutral" id="{{ $question['type'] }}-1" name="data[{{ $question['type'] }}]" value="1" @if ((string)($questionData[$question['type']]->result ?? '') === '1' ) checked @endif>
                             </label>
                         </div>
                     </div>
@@ -336,7 +336,7 @@
                 @endforeach
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -361,7 +361,7 @@
                 {{-- @endforeach --}}
 
                 <div class="div">
-                    <button class="w-full btn btn-primary text-white">Save</button>
+                    <button class="w-full btn btn-neutral text-white">Save</button>
                 </div>
                 </form>
             </div>
@@ -372,7 +372,7 @@
                     </div>
                     <div class="basis-1/2">
                         <div class="text-end">
-                            <a href="{{ route('report.activity.add', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                            <a href="{{ route('report.activity.add', ['report' => $report->reportId]) }}" class="btn btn-neutral btn-sm text-white">Add</a>
                         </div>
                     </div>
                 </div>
@@ -397,7 +397,7 @@
                     </div>
                     <div class="basis-1/2">
                         <div class="text-end">
-                            <a href="{{ route('report.activityPlan.add', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                            <a href="{{ route('report.activityPlan.add', ['report' => $report->reportId]) }}" class="btn btn-neutral btn-sm text-white">Add</a>
                         </div>
                     </div>
                 </div>

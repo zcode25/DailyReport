@@ -11,7 +11,7 @@
                                 <img src="/image/logo.png" alt="logo">
                             </div>
                         </div>
-                        <p class="text-gray-700 text-md font-bold">PT Sugih Anggra Wijaya</p>
+                        <p class="text-gray-700 text-md font-bold">PT SUGIH ANGGRA WIJAYA</p>
                     </a>
                 </div>
 

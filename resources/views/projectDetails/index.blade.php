@@ -28,7 +28,7 @@
                     </div>
                     <div class="basis-1/2">
                         <div class="text-end">
-                            <a href="{{ route('projectDetail.reporter.add', ['project' => $project->projectId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                            <a href="{{ route('projectDetail.reporter.add', ['project' => $project->projectId]) }}" class="btn btn-neutral btn-sm text-white">Add</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="basis-1/2">
                         <div class="text-end">
-                            <a href="{{ route('projectDetail.add', ['project' => $project->projectId]) }}" class="btn btn-primary btn-sm text-white">Add</a>
+                            <a href="{{ route('projectDetail.add', ['project' => $project->projectId]) }}" class="btn btn-neutral btn-sm text-white">Add</a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="text-end">
                             {{-- @if (Auth::user()->level == 0 || Auth::user()->id == $report->userId) --}}
-                            <a href="{{ route('report.index', ['report' => $report->reportId]) }}" class="btn btn-success btn-sm text-white">Detail</a>
+                            <a href="{{ route('report.index', ['report' => $report->reportId]) }}" class="btn btn-primary btn-sm text-white">Detail</a>
                             {{-- @endif --}}
                         </div>
                     </div>
