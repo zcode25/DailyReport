@@ -36,7 +36,7 @@
                                     <a href="{{ route('project.edit', ['project' => $project->projectId]) }}" class="btn btn-neutral text-white btn-sm">Update</a>
                                 @endif
 
-                                <a href="{{ route('projectDetail.index', ['project' => $project->projectId]) }}" class="btn btn-primary text-white btn-sm">Detail</a>
+                                <a href="{{ route('projectDetail.index', ['project' => $project->projectId]) }}" class="btn btn-primary text-white btn-sm">Report</a>
                             </div>
                         </div>
                     </div>
